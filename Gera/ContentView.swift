@@ -9,15 +9,37 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
-        }
-        .padding()
+        StartScreenView()
     }
 }
+
+struct StartScreenView: View {
+    
+    var body: some View {
+        NavigationView() {
+            VStack {
+                NavigationLink(destination: ConnectScreenView(), label: {Text("Start game")})
+            }
+        }
+    }
+}
+
+struct ConnectScreenView: View {
+    
+    var body: some View {
+        NavigationView() {
+            VStack {
+                Spacer()
+                Button("Host") { }
+                Spacer()
+                Button("Join") { }
+                Spacer()
+            }
+        }
+    }
+}
+
+
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
