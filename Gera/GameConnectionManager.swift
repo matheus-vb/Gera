@@ -8,26 +8,42 @@
 import Foundation
 import MultipeerConnectivity
 
-class GameConnectionManager: NSObject, ObservableObject, MCSessionDelegate, MCAdvertiserAssistantDelegate, MCBrowserViewControllerDelegate {
+protocol GameConnectionManagerDelegate {
+    func colorChanged(manager: GameConnectionManager, colorName: String)
+}
+
+class GameConnectionManager: NSObject, ObservableObject, MCSessionDelegate, MCAdvertiserAssistantDelegate, MCBrowserViewControllerDelegate, MCNearbyServiceAdvertiserDelegate {
     
     private static let serviceType = "gamemanager-mpc"
     
+    @Published var connectedToGame = false
+    @Published var colorStr: String
+    
     let peerID: MCPeerID!
     var session: MCSession!
-    var advertiseAssistant: MCAdvertiserAssistant!
+    var advertiseAssistant: MCNearbyServiceAdvertiser!
+    
+    var delegate: GameConnectionManagerDelegate?
     
     override init() {
         peerID = MCPeerID(displayName: UIDevice.current.name)
         session = MCSession(peer: peerID, securityIdentity: nil, encryptionPreference: .required)
+        colorStr = "red"
         
         super.init()
         session.delegate = self
     }
     
     func hostGame() {
-        advertiseAssistant = MCAdvertiserAssistant(serviceType: GameConnectionManager.serviceType, discoveryInfo: nil, session: session)
+        advertiseAssistant = MCNearbyServiceAdvertiser(peer: peerID, discoveryInfo: nil, serviceType: GameConnectionManager.serviceType)
         advertiseAssistant.delegate = self
-        advertiseAssistant.start()
+        advertiseAssistant.startAdvertisingPeer()
+        connectedToGame = true
+        
+        
+//        advertiseAssistant = MCAdvertiserAssistant(serviceType: GameConnectionManager.serviceType, discoveryInfo: nil, session: session)
+//        advertiseAssistant.delegate = self
+//        advertiseAssistant.start()
     }
     
     func joinGame() {
@@ -48,7 +64,25 @@ class GameConnectionManager: NSObject, ObservableObject, MCSessionDelegate, MCAd
             print(device)
         }
     }
+
+    func send(colorName: String) {
+        printDevices()
+        do {
+            if colorStr == "red" {
+                colorStr = "blue"
+            } else {
+                colorStr = "red"
+            }
+
+            try self.session.send(colorName.data(using: .utf8)!, toPeers: session.connectedPeers, with: .reliable)
+        } catch let error {
+            print(error)
+        }
+    }
     
+    func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID, withContext context: Data?, invitationHandler: @escaping (Bool, MCSession?) -> Void) {
+        invitationHandler(true, session)
+    }
     
     func browserViewControllerDidFinish(_ browserViewController: MCBrowserViewController) {
         browserViewController.dismiss(animated: true)
@@ -61,15 +95,25 @@ class GameConnectionManager: NSObject, ObservableObject, MCSessionDelegate, MCAd
     func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
         if state == MCSessionState.connected {
             print("Connected: \(peerID.displayName)")
+            DispatchQueue.main.async {
+                self.connectedToGame = true
+            }
         } else if state == MCSessionState.connecting {
             print("Connecting: \(peerID.displayName)")
         } else if state == MCSessionState.notConnected {
             print("Not connected: \(peerID.displayName)")
+            connectedToGame = false
         }
     }
     
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
-        //
+        let str = String(data: data, encoding: .utf8)!
+        print(str)
+        DispatchQueue.main.async {
+            self.colorStr = str
+        }
+        print(colorStr)
+//        self.delegate?.colorChanged(manager: self, colorName: str)
     }
     
     func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {
