@@ -25,14 +25,22 @@ struct StartScreenView: View {
 }
 
 struct ConnectScreenView: View {
+    @ObservedObject private var gameConnectionManager = GameConnectionManager()
+    
+    
     
     var body: some View {
         NavigationView() {
             VStack {
                 Spacer()
-                Button("Host") { }
+                Button("Host") {
+                    gameConnectionManager.hostGame()
+                }
                 Spacer()
-                Button("Join") { }
+                Button("Join") {
+                    gameConnectionManager.joinGame()
+                    gameConnectionManager.printDevices()
+                }
                 Spacer()
             }
         }
