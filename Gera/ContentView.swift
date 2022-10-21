@@ -30,13 +30,13 @@ struct ColorTestView: View {
     
     var body: some View {
         ZStack{
-            backgroundColor.edgesIgnoringSafeArea(.all)
+            gameConnectionManager.color.edgesIgnoringSafeArea(.all)
             VStack{
                 Button("Change") {
-                    if gameConnectionManager.colorStr == "red" {
+                    if backgroundColor == .red {
                         changeColor(color: .blue)
                         gameConnectionManager.send(colorName: "blue")
-                    } else if gameConnectionManager.colorStr == "blue" {
+                    } else if backgroundColor == .blue {
                         changeColor(color: .red)
                         gameConnectionManager.send(colorName: "red")
                     }

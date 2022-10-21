@@ -7,6 +7,7 @@
 
 import Foundation
 import MultipeerConnectivity
+import SwiftUI
 
 protocol GameConnectionManagerDelegate {
     func colorChanged(manager: GameConnectionManager, colorName: String)
@@ -17,7 +18,7 @@ class GameConnectionManager: NSObject, ObservableObject, MCSessionDelegate, MCAd
     private static let serviceType = "gamemanager-mpc"
     
     @Published var connectedToGame = false
-    @Published var colorStr: String
+    @Published var color: Color
     
     let peerID: MCPeerID!
     var session: MCSession!
@@ -28,7 +29,7 @@ class GameConnectionManager: NSObject, ObservableObject, MCSessionDelegate, MCAd
     override init() {
         peerID = MCPeerID(displayName: UIDevice.current.name)
         session = MCSession(peer: peerID, securityIdentity: nil, encryptionPreference: .required)
-        colorStr = "red"
+        color = .red
         
         super.init()
         session.delegate = self
@@ -68,12 +69,6 @@ class GameConnectionManager: NSObject, ObservableObject, MCSessionDelegate, MCAd
     func send(colorName: String) {
         printDevices()
         do {
-            if colorStr == "red" {
-                colorStr = "blue"
-            } else {
-                colorStr = "red"
-            }
-
             try self.session.send(colorName.data(using: .utf8)!, toPeers: session.connectedPeers, with: .reliable)
         } catch let error {
             print(error)
@@ -109,10 +104,19 @@ class GameConnectionManager: NSObject, ObservableObject, MCSessionDelegate, MCAd
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
         let str = String(data: data, encoding: .utf8)!
         print(str)
-        DispatchQueue.main.async {
-            self.colorStr = str
+        
+        if str == "red" {
+            DispatchQueue.main.async {
+                self.color = .red
+            }
+        } else if str == "blue" {
+            DispatchQueue.main.async {
+                self.color = .blue
+            }
         }
-        print(colorStr)
+        
+        
+
 //        self.delegate?.colorChanged(manager: self, colorName: str)
     }
     
