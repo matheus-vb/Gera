@@ -79,6 +79,7 @@ class GameConnectionManager: NSObject, ObservableObject, MCSessionDelegate, MCAd
         invitationHandler(true, session)
     }
     
+    
     func browserViewControllerDidFinish(_ browserViewController: MCBrowserViewController) {
         browserViewController.dismiss(animated: true)
     }
