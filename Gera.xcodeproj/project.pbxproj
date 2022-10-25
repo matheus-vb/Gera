@@ -17,6 +17,7 @@
 		86DAA03929070BB600CD3577 /* ConnectScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86DAA03829070BB600CD3577 /* ConnectScreenView.swift */; };
 		86DAA03B29070C4F00CD3577 /* stylePlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86DAA03A29070C4F00CD3577 /* stylePlaceholder.swift */; };
 		86DAA03F29070C7B00CD3577 /* modelPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86DAA03E29070C7B00CD3577 /* modelPlaceholder.swift */; };
+		86DAA0412907246700CD3577 /* Color+hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86DAA0402907246700CD3577 /* Color+hex.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		86DAA03829070BB600CD3577 /* ConnectScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectScreenView.swift; sourceTree = "<group>"; };
 		86DAA03A29070C4F00CD3577 /* stylePlaceholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = stylePlaceholder.swift; sourceTree = "<group>"; };
 		86DAA03E29070C7B00CD3577 /* modelPlaceholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = modelPlaceholder.swift; sourceTree = "<group>"; };
+		86DAA0402907246700CD3577 /* Color+hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+hex.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +117,7 @@
 			isa = PBXGroup;
 			children = (
 				86DAA03A29070C4F00CD3577 /* stylePlaceholder.swift */,
+				86DAA0402907246700CD3577 /* Color+hex.swift */,
 			);
 			path = Style;
 			sourceTree = "<group>";
@@ -195,6 +198,7 @@
 				86BCF4A028F66F2100942758 /* GeraApp.swift in Sources */,
 				86DAA03B29070C4F00CD3577 /* stylePlaceholder.swift in Sources */,
 				86DAA03F29070C7B00CD3577 /* modelPlaceholder.swift in Sources */,
+				86DAA0412907246700CD3577 /* Color+hex.swift in Sources */,
 				86BCF4CE28FF23E100942758 /* GameConnectionManager.swift in Sources */,
 				86DAA03929070BB600CD3577 /* ConnectScreenView.swift in Sources */,
 			);
