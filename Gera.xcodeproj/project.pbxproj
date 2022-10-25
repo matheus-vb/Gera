@@ -18,6 +18,7 @@
 		86DAA03B29070C4F00CD3577 /* stylePlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86DAA03A29070C4F00CD3577 /* stylePlaceholder.swift */; };
 		86DAA03F29070C7B00CD3577 /* modelPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86DAA03E29070C7B00CD3577 /* modelPlaceholder.swift */; };
 		86DAA0412907246700CD3577 /* Color+hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86DAA0402907246700CD3577 /* Color+hex.swift */; };
+		86DAA04329086B8200CD3577 /* GameScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86DAA04229086B8200CD3577 /* GameScreenView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		86DAA03A29070C4F00CD3577 /* stylePlaceholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = stylePlaceholder.swift; sourceTree = "<group>"; };
 		86DAA03E29070C7B00CD3577 /* modelPlaceholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = modelPlaceholder.swift; sourceTree = "<group>"; };
 		86DAA0402907246700CD3577 /* Color+hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+hex.swift"; sourceTree = "<group>"; };
+		86DAA04229086B8200CD3577 /* GameScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScreenView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +101,7 @@
 			isa = PBXGroup;
 			children = (
 				86DAA03429070B9300CD3577 /* StartScreenView.swift */,
+				86DAA04229086B8200CD3577 /* GameScreenView.swift */,
 				86DAA03629070BA200CD3577 /* ColorTestView.swift */,
 				86DAA03829070BB600CD3577 /* ConnectScreenView.swift */,
 			);
@@ -196,6 +199,7 @@
 				86DAA03729070BA200CD3577 /* ColorTestView.swift in Sources */,
 				86DAA03529070B9300CD3577 /* StartScreenView.swift in Sources */,
 				86BCF4A028F66F2100942758 /* GeraApp.swift in Sources */,
+				86DAA04329086B8200CD3577 /* GameScreenView.swift in Sources */,
 				86DAA03B29070C4F00CD3577 /* stylePlaceholder.swift in Sources */,
 				86DAA03F29070C7B00CD3577 /* modelPlaceholder.swift in Sources */,
 				86DAA0412907246700CD3577 /* Color+hex.swift in Sources */,
