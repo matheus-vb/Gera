@@ -7,7 +7,37 @@
 
 import SwiftUI
 
-struct ConnexionScreen: View {
+struct ConnexionScreenView: View{
+    var body: some View{
+        GeometryReader { geometry in
+            ZStack(alignment: .center){
+                BackgroundConnexionScreen()
+                VStack{
+                    Rectangle()
+                    Buttons()
+                }.frame(width: 306.13, height: geometry.size.height * 0.87 * 0.88)
+                    .position(x: geometry.size.width * 0.5, y: geometry.size.height * 0.54)
+            }
+        }.edgesIgnoringSafeArea(.vertical)
+    }
+}
+
+struct Buttons: View{
+    @State var text: String = "Testinho"
+    @State var spacing: CGFloat = 100
+    @State var icon: String = "Add_Button"
+    var body: some View{
+        ZStack{
+            Image("Frame_Grande")
+            HStack(spacing: spacing){
+                Text(text)
+                Image(icon)
+            }.frame(width: 264).background(.red)
+        }
+    }
+}
+
+struct BackgroundConnexionScreen: View {
     var body: some View {
         GeometryReader { geometry in
             ZStack{
@@ -24,6 +54,11 @@ struct ConnexionScreen: View {
                 VStack{
                     Clipboard()
                 }.frame(width: 338.76, height: geometry.size.height * 0.87)
+                VStack{
+                    
+                }.frame(width: 306.13, height: geometry.size.height * 0.87 * 0.88)
+                    .position(x: geometry.size.width * 0.5, y: geometry.size.height * 0.54)
+                
 
             }
             
@@ -40,12 +75,11 @@ struct Clipboard: View {
                     .zIndex(1)
                 Image("board")
                     .resizable()
-                    .frame(width: .infinity, height: geometry.size.height * 0.9155)
-                    //.position(x: geometry.size.width * 0.5, y: geometry.size.height * 0.5 + (geometry.size.height * (1-0.9155))*0.5)
+                    .frame(width: geometry.size.width, height: geometry.size.height * 0.9155)
             }
             .position(x: geometry.size.width * 0.5, y: geometry.size.height * 0.5)
         }
-        .edgesIgnoringSafeArea(.vertical)
+        //.edgesIgnoringSafeArea(.vertical)
     }
 }
 
@@ -69,7 +103,7 @@ struct Clipboard: View {
 
 struct ConnexionScreen_Previews: PreviewProvider {
     static var previews: some View {
-        ConnexionScreen()
+        ConnexionScreenView()
         //Clipboard()
     }
 }
