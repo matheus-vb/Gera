@@ -33,6 +33,8 @@ struct StartScreenView: View {
                 Group {
                     Image("bubble1")
                     Image("bubble2")
+                    Image("Title")
+                        .offset(y: -182)
                 }
                 Group {
                     Image("bac1")
@@ -47,11 +49,11 @@ struct StartScreenView: View {
                         }(),
                                 y: {
                             if animatingJ && !animatingI {
-                                return -10
-                            }  else if animatingJ && animatingI {
                                 return 20
+                            }  else if animatingJ && animatingI {
+                                return 40
                             } else {
-                                return -20
+                                return 10
                             }
                         }())
                         .animation(.easeInOut(duration: 3.5).repeatForever(), value: animatingJ)
@@ -75,11 +77,11 @@ struct StartScreenView: View {
                         }(),
                                 y: {
                             if animatingJ && !animatingI {
-                                return -155
+                                return -95
                             }  else if animatingJ && animatingI {
-                                return -160
+                                return -100
                             } else {
-                                return -170
+                                return -110
                             }
                         }())
                         .animation(.easeInOut(duration: 3).repeatForever(), value: animatingJ)
