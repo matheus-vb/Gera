@@ -55,18 +55,15 @@ struct GameScreenView: View {
                 startLocation = startLocation ?? offset1 // 2
             }.onEnded { value in
                 withAnimation(.spring()) {
-                    let semaphore = DispatchSemaphore(value: 1)
                     
                     if value.location.y < 110 && value.location.y > -10 {
-                        withAnimation(.linear(duration: 2)) {
+                        withAnimation(.easeInOut(duration: 1.25)) {
                             self.colorLeft = Color(.purple)
-                            semaphore.signal()
+                            self.offset1 = location1
                         }
+                    }else {
+                        self.offset1 = location1
                     }
-                    semaphore.wait()
-                    
-                    self.offset1 = location1
-                    
                 }
             }
     }
@@ -84,7 +81,15 @@ struct GameScreenView: View {
                 startLocation = startLocation ?? offset2 // 2
             }.onEnded { value in
                 withAnimation(.spring()) {
-                    self.offset2 = location2
+                    
+                    if value.location.y < 110 && value.location.y > -10 {
+                        withAnimation(.easeInOut(duration: 1.25)) {
+                            self.colorLeft = Color(.orange)
+                            self.offset2 = location2
+                        }
+                    }else {
+                        self.offset2 = location2
+                    }
                 }
             }
     }
@@ -102,7 +107,15 @@ struct GameScreenView: View {
                 startLocation = startLocation ?? offset3 // 2
             }.onEnded { value in
                 withAnimation(.spring()) {
-                    self.offset3 = location3
+                    
+                    if value.location.y < 110 && value.location.y > -10 {
+                        withAnimation(.easeInOut(duration: 1.25)) {
+                            self.colorLeft = Color(.red)
+                            self.offset3 = location3
+                        }
+                    }else {
+                        self.offset3 = location3
+                    }
                 }
             }
     }
@@ -120,7 +133,15 @@ struct GameScreenView: View {
                 startLocation = startLocation ?? offset4 // 2
             }.onEnded { value in
                 withAnimation(.spring()) {
-                    self.offset4 = location4
+                    
+                    if value.location.y < 110 && value.location.y > -10 {
+                        withAnimation(.easeInOut(duration: 1.25)) {
+                            self.colorLeft = Color(.blue)
+                            self.offset4 = location4
+                        }
+                    }else {
+                        self.offset4 = location4
+                    }
                 }
             }
     }
@@ -138,7 +159,15 @@ struct GameScreenView: View {
                 startLocation = startLocation ?? offset5 // 2
             }.onEnded { value in
                 withAnimation(.spring()) {
-                    self.offset5 = location5
+                    
+                    if value.location.y < 110 && value.location.y > -10 {
+                        withAnimation(.easeInOut(duration: 1.25)) {
+                            self.colorLeft = Color(.systemPink)
+                            self.offset5 = location5
+                        }
+                    }else {
+                        self.offset5 = location5
+                    }
                 }
             }
     }
