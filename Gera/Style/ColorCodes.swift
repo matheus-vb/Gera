@@ -14,7 +14,6 @@ struct ColorCodes {
     let RED = "AC1427"
     let PINK = "F700FC"
     let ORANGE = "F05600"
-    
     let LIGHT_GREEN = "00E117"
     let DARK_GREEN = "029410"
     let CYAN = "00F0FF"

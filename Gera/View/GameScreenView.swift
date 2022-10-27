@@ -15,18 +15,61 @@ struct GameScreenView: View {
     
     var playerColors: PlayerColors
     
+    let asset1: String
+    let asset2: String
+    let asset3: String
+    let asset4: String
+    let asset5: String
+    
+    let asset6: String
+    let asset7: String
+    let asset8: String
+    let asset9: String
+    let asset10: String
+    
     init(player: Int) {
         self.player = player
         
         if player == 1 {
             playerColors = PlayerColors(player: 1)
+            asset1 = "p1_blue"
+            asset2 = "p1_orange"
+            asset3 = "p1_red"
+            asset4 = "p1_blue"
+            asset5 = "p1_pink"
+            asset6 = "p1_lightGreen"
+            asset7 = "p1_darkGreen"
+            asset8 = "p1_yellow"
+            asset9 = "p1_brown"
+            asset10 = "p1_cyan"
+            
         } else if player == 2 {
             playerColors = PlayerColors(player: 2)
+            asset1 = "p2_lightGreen"
+            asset2 = "p2_darkGreen"
+            asset3 = "p2_yellow"
+            asset4 = "p2_brown"
+            asset5 = "p2_cyan"
+            asset6 = "p2_blue"
+            asset7 = "p2_orange"
+            asset8 = "p2_red"
+            asset9 = "p2_blue"
+            asset10 = "p2_pink"
+            
         } else {
             playerColors = PlayerColors(player: 0)
+            asset1 = "p1_blue"
+            asset2 = "p1_orange"
+            asset3 = "p1_red"
+            asset4 = "p1_blue"
+            asset5 = "p1_pink"
+            asset6 = "p1_lightGreen"
+            asset7 = "p1_darkGreen"
+            asset8 = "p1_yellow"
+            asset9 = "p1_brown"
+            asset10 = "p1_cyan"
         }
     }
-    
     
     @State var playerOnePlayed: Bool = false
     @State var playerTwoPlayed: Bool = false
@@ -218,15 +261,15 @@ struct GameScreenView: View {
                     .foregroundColor(Color(.white))
             }
             Group {
-                Image("p1_cyan")
+                Image(asset10)
                     .offset(x: 150, y: -210)
-                Image("p1_brown")
+                Image(asset9)
                     .offset(x: 75, y: -210)
-                Image("p1_yellow")
+                Image(asset8)
                     .offset(x: 0, y: -210)
-                Image("p1_lightGreen")
+                Image(asset7)
                     .offset(x: -75, y: -210)
-                Image("p1_darkGreen")
+                Image(asset6)
                     .offset(x: -150, y: -210)
             }
             Group {
@@ -253,23 +296,23 @@ struct GameScreenView: View {
                     .offset(y: -85)
             }
             Group {
-                Image("p1_purple")
+                Image(asset1)
                     .offset(CGSize(width: offset1.x, height: offset1.y))
                     .gesture(dragGesture1)
                 
-                Image("p1_orange")
+                Image(asset2)
                     .offset(CGSize(width: offset2.x, height: offset2.y))
                     .gesture(dragGesture2)
                 
-                Image("p1_red")
+                Image(asset3)
                     .offset(CGSize(width: offset3.x, height: offset3.y))
                     .gesture(dragGesture3)
                 
-                Image("p1_blue")
+                Image(asset4)
                     .offset(CGSize(width: offset4.x, height: offset4.y))
                     .gesture(dragGesture4)
                 
-                Image("p1_pink")
+                Image(asset5)
                     .offset(CGSize(width: offset5.x, height: offset5.y))
                     .gesture(dragGesture5)
                 
