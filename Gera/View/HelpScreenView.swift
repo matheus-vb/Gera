@@ -13,7 +13,7 @@ struct HelpScreenView: View{
         GeometryReader { geometry in
             NavigationView{
                 ZStack(alignment: .center){
-                    BackgroundConnexionScreen()
+                BackgroundConnexionScreen()
                     VStack(alignment: .center){
                         HStack(){
                             Button(action: {
@@ -21,7 +21,7 @@ struct HelpScreenView: View{
                             }) {
                                 Image("Back_Button")
                             }
-                            Spacer()
+                           Spacer()
                             Button(action: {
                                 print("d")
                             }) {
@@ -29,27 +29,51 @@ struct HelpScreenView: View{
                             }
                         }
                         .padding(.horizontal)
-                        Spacer()
-                        Text("ESCOLHA SEU CIENTISTA PARCEIRO").font(.system(size: 24)).fontWeight(.medium).multilineTextAlignment(.center)
-                        Spacer()
-                        Button(action: {
-                            print("d")
-                        }) {
-                            MyButton(text: "Criar Sala", icon: "Add_Button", isBig: true)
+                        
+                        
+                        VStack{
+                            Text("O Destino da Humanidade Está em suas Mãos")
+                                .font(.system(size: 24))
+                                .fontWeight(.medium)
+                                .multilineTextAlignment(.center)
+                                .frame(width: 300, height: 100)
+                            
+                            
+                            Text("Salve a humanidade de uma terrível bactéria em 30 segundos")
+                                .font(.system(size: 14))
+                                .fontWeight(.light)
+                                .multilineTextAlignment(.center)
+                                .frame(width: 300, height: 40)
+                           
+                            
+                            Image("Foto_Bacteria")
+                           
+                            
+                            Text("Você e seu cientista parceiro devem misturar compostos para descobrir o antibiótico correto.")
+                                .font(.system(size: 14))
+                                .fontWeight(.light)
+                                .multilineTextAlignment(.leading)
+                                .frame(width: 300, height: 60)
+                       
+                      
+                        
+                   
+                            HStack{
+                                Image("Foto_Compostos")
+                                Image("Foto_Barrinha")
+                            }
+                           
+                            
+                            Text("A cada mistura as cores selecionadas serão indicadas na barrinha acima.")
+                              .font(.system(size: 14))
+                              .fontWeight(.light)
+                              .multilineTextAlignment(.leading)
+                              .frame(width: 300, height: 60)
+                            Spacer()
                         }
-                        Spacer()
-                        Button(action: {
-                            print("d")
-                        }) {
-                            MyButton(text: "Selecionar Parceiro", icon: "Find_Button", isBig: true)
-                        }
-                        Spacer()
-                        Button(action: {
-                            print("d")
-                        }) {
-                            MyButton(text: "Ranking", icon: "Rank_Button", isBig: false)
-                        }
-                        Spacer()
+                       
+                        
+                       
                     }
                     .padding(.vertical)
                     .frame(width: 306.13, height: geometry.size.height * 0.8)
