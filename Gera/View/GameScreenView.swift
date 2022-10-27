@@ -8,22 +8,28 @@
 import Foundation
 import SwiftUI
 
-struct Shake: GeometryEffect {
-    var amount: CGFloat = 10
-    var shakesPerUnit = 3
-    var animatableData: CGFloat
-
-    func effectValue(size: CGSize) -> ProjectionTransform {
-        ProjectionTransform(CGAffineTransform(translationX:
-            amount * sin(animatableData * .pi * CGFloat(shakesPerUnit)),
-            y: 0))
-    }
-}
-
 
 struct GameScreenView: View {
     
-    @State var shake1 = false
+    let player: Int
+    
+    var playerColors: PlayerColors
+    
+    init(player: Int) {
+        self.player = player
+        
+        if player == 1 {
+            playerColors = PlayerColors(player: 1)
+        } else if player == 2 {
+            playerColors = PlayerColors(player: 2)
+        } else {
+            playerColors = PlayerColors(player: 0)
+        }
+    }
+    
+    
+    @State var playerOnePlayed: Bool = false
+    @State var playerTwoPlayed: Bool = false
     
     let location1: CGPoint = CGPoint(x: -150, y: 245)
     let location2: CGPoint = CGPoint(x: -75, y: 245)
@@ -42,6 +48,7 @@ struct GameScreenView: View {
     
     @GestureState var startLocation: CGPoint? = nil
     
+    //MARK: - Purple drag
     var dragGesture1: some Gesture {
         DragGesture()
             .onChanged { value in
@@ -56,10 +63,11 @@ struct GameScreenView: View {
             }.onEnded { value in
                 withAnimation(.spring()) {
                     
-                    if value.location.y < 110 && value.location.y > -10 {
+                    if value.location.y < 110 && value.location.y > -10 && !playerOnePlayed {
                         withAnimation(.easeInOut(duration: 1.25)) {
-                            self.colorLeft = Color(.purple)
+                            self.colorLeft = Color(hex: playerColors.color1)
                             self.offset1 = location1
+                            playerOnePlayed = true
                         }
                     }else {
                         self.offset1 = location1
@@ -68,6 +76,7 @@ struct GameScreenView: View {
             }
     }
     
+    //MARK: - Orange drag
     var dragGesture2: some Gesture {
         DragGesture()
             .onChanged { value in
@@ -84,7 +93,7 @@ struct GameScreenView: View {
                     
                     if value.location.y < 110 && value.location.y > -10 {
                         withAnimation(.easeInOut(duration: 1.25)) {
-                            self.colorLeft = Color(.orange)
+                            self.colorLeft = Color(hex: playerColors.color2)
                             self.offset2 = location2
                         }
                     }else {
@@ -94,6 +103,7 @@ struct GameScreenView: View {
             }
     }
     
+    //MARK: - Red drag
     var dragGesture3: some Gesture {
         DragGesture()
             .onChanged { value in
@@ -110,7 +120,7 @@ struct GameScreenView: View {
                     
                     if value.location.y < 110 && value.location.y > -10 {
                         withAnimation(.easeInOut(duration: 1.25)) {
-                            self.colorLeft = Color(.red)
+                            self.colorLeft = Color(hex: playerColors.color3)
                             self.offset3 = location3
                         }
                     }else {
@@ -120,6 +130,7 @@ struct GameScreenView: View {
             }
     }
     
+    //MARK: - Blue drag
     var dragGesture4: some Gesture {
         DragGesture()
             .onChanged { value in
@@ -136,7 +147,7 @@ struct GameScreenView: View {
                     
                     if value.location.y < 110 && value.location.y > -10 {
                         withAnimation(.easeInOut(duration: 1.25)) {
-                            self.colorLeft = Color(.blue)
+                            self.colorLeft = Color(hex: playerColors.color4)
                             self.offset4 = location4
                         }
                     }else {
@@ -146,6 +157,7 @@ struct GameScreenView: View {
             }
     }
     
+    //MARK: - Pink drag
     var dragGesture5: some Gesture {
         DragGesture()
             .onChanged { value in
@@ -162,7 +174,7 @@ struct GameScreenView: View {
                     
                     if value.location.y < 110 && value.location.y > -10 {
                         withAnimation(.easeInOut(duration: 1.25)) {
-                            self.colorLeft = Color(.systemPink)
+                            self.colorLeft = Color(hex: playerColors.color5)
                             self.offset5 = location5
                         }
                     }else {
@@ -186,7 +198,7 @@ struct GameScreenView: View {
             }
             Group {
                 Button(action: {
-                    //config view
+                    playerOnePlayed = false
                 }) {
                     Image("Config_Button")
                 }.offset(x: 130, y: -300)
@@ -249,15 +261,15 @@ struct GameScreenView: View {
         }
     }
     
-    func waitTime() async {
-        try? await Task.sleep(nanoseconds: 1000)
+    mutating func playerOneToggle() {
+        playerOnePlayed.toggle()
     }
     
 }
 
 struct GameScreenView_Previews: PreviewProvider {
     static var previews: some View {
-        GameScreenView()
+        GameScreenView(player: 1)
     }
 }
 

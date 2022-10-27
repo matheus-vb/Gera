@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		869F96BD290B0B5E0026B9D3 /* ColorCodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869F96BC290B0B5E0026B9D3 /* ColorCodes.swift */; };
+		869F96BF290B0C850026B9D3 /* PlayerColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869F96BE290B0C850026B9D3 /* PlayerColors.swift */; };
 		86BCF4A028F66F2100942758 /* GeraApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86BCF49F28F66F2100942758 /* GeraApp.swift */; };
 		86BCF4A228F66F2100942758 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86BCF4A128F66F2100942758 /* ContentView.swift */; };
 		86BCF4A428F66F2300942758 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 86BCF4A328F66F2300942758 /* Assets.xcassets */; };
@@ -23,6 +25,8 @@
 
 /* Begin PBXFileReference section */
 		8602D0FC290117A200C85A6B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		869F96BC290B0B5E0026B9D3 /* ColorCodes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorCodes.swift; sourceTree = "<group>"; };
+		869F96BE290B0C850026B9D3 /* PlayerColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerColors.swift; sourceTree = "<group>"; };
 		86BCF49C28F66F2100942758 /* Gera.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Gera.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		86BCF49F28F66F2100942758 /* GeraApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeraApp.swift; sourceTree = "<group>"; };
 		86BCF4A128F66F2100942758 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -93,6 +97,7 @@
 			isa = PBXGroup;
 			children = (
 				86DAA03E29070C7B00CD3577 /* modelPlaceholder.swift */,
+				869F96BE290B0C850026B9D3 /* PlayerColors.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -121,6 +126,7 @@
 			children = (
 				86DAA03A29070C4F00CD3577 /* stylePlaceholder.swift */,
 				86DAA0402907246700CD3577 /* Color+hex.swift */,
+				869F96BC290B0B5E0026B9D3 /* ColorCodes.swift */,
 			);
 			path = Style;
 			sourceTree = "<group>";
@@ -196,9 +202,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				86BCF4A228F66F2100942758 /* ContentView.swift in Sources */,
+				869F96BF290B0C850026B9D3 /* PlayerColors.swift in Sources */,
 				86DAA03729070BA200CD3577 /* ColorTestView.swift in Sources */,
 				86DAA03529070B9300CD3577 /* StartScreenView.swift in Sources */,
 				86BCF4A028F66F2100942758 /* GeraApp.swift in Sources */,
+				869F96BD290B0B5E0026B9D3 /* ColorCodes.swift in Sources */,
 				86DAA04329086B8200CD3577 /* GameScreenView.swift in Sources */,
 				86DAA03B29070C4F00CD3577 /* stylePlaceholder.swift in Sources */,
 				86DAA03F29070C7B00CD3577 /* modelPlaceholder.swift in Sources */,
