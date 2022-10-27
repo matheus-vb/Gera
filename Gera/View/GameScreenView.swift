@@ -32,25 +32,25 @@ struct GameScreenView: View {
         
         if player == 1 {
             playerColors = PlayerColors(player: 1)
-            asset1 = "p1_blue"
+            asset1 = "p1_purple"
             asset2 = "p1_orange"
             asset3 = "p1_red"
             asset4 = "p1_blue"
             asset5 = "p1_pink"
-            asset6 = "p1_lightGreen"
-            asset7 = "p1_darkGreen"
+            asset6 = "p1_darkGreen"
+            asset7 = "p1_lightGreen"
             asset8 = "p1_yellow"
             asset9 = "p1_brown"
             asset10 = "p1_cyan"
             
         } else if player == 2 {
             playerColors = PlayerColors(player: 2)
-            asset1 = "p2_lightGreen"
-            asset2 = "p2_darkGreen"
+            asset1 = "p2_darkGreen"
+            asset2 = "p2_lightGreen"
             asset3 = "p2_yellow"
             asset4 = "p2_brown"
             asset5 = "p2_cyan"
-            asset6 = "p2_blue"
+            asset6 = "p2_purple"
             asset7 = "p2_orange"
             asset8 = "p2_red"
             asset9 = "p2_blue"
@@ -58,7 +58,7 @@ struct GameScreenView: View {
             
         } else {
             playerColors = PlayerColors(player: 0)
-            asset1 = "p1_blue"
+            asset1 = "p1_purple"
             asset2 = "p1_orange"
             asset3 = "p1_red"
             asset4 = "p1_blue"
@@ -109,11 +109,10 @@ struct GameScreenView: View {
             }.onEnded { value in
                 withAnimation(.spring()) {
                     
-                    if value.location.y < 110 && value.location.y > -10 && !playerOnePlayed {
+                    if value.location.y < 110 && value.location.y > -10 {
                         withAnimation(.easeInOut(duration: 1.25)) {
                             self.colorLeft = Color(hex: playerColors.color1)
                             self.offset1 = location1
-                            playerOnePlayed = true
                         }
                     }else {
                         self.offset1 = location1
@@ -230,6 +229,8 @@ struct GameScreenView: View {
             }
     }
     
+    
+    //MARK: - VIEW BODY
     var body: some View {
         ZStack {
             Color(hex: "112E56")
@@ -244,7 +245,7 @@ struct GameScreenView: View {
             }
             Group {
                 Button(action: {
-                    playerOnePlayed = false
+                    //config view
                 }) {
                     Image("Config_Button")
                 }.offset(x: 130, y: -300)
@@ -319,16 +320,11 @@ struct GameScreenView: View {
             }
         }
     }
-    
-    mutating func playerOneToggle() {
-        playerOnePlayed.toggle()
-    }
-    
 }
 
 struct GameScreenView_Previews: PreviewProvider {
     static var previews: some View {
-        GameScreenView(player: 1)
+        GameScreenView(player: 2)
     }
 }
 
