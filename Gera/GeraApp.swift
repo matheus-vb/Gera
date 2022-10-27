@@ -11,7 +11,7 @@ import SwiftUI
 struct GeraApp: App {
     var body: some Scene {
         WindowGroup {
-            GameScreenView(player: 2)
+            StartScreenView()
         }
     }
 }
