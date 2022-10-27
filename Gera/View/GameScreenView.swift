@@ -81,6 +81,7 @@ struct GameScreenView: View {
     let location5: CGPoint = CGPoint(x: 150, y: 245)
     
     @State var timeRemaining = 30
+    @State var timeRemainingString = "30"
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
     @State var offset1: CGPoint = CGPoint(x: -150, y: 245)
@@ -251,10 +252,15 @@ struct GameScreenView: View {
                 }.offset(x: 130, y: -300)
                 Image("TEMPO")
                     .offset(x: -130, y: -300)
-                Text("00:\(timeRemaining)")
+                Text("00:\(timeRemainingString)")
                     .onReceive(timer) { _ in
                         if timeRemaining > 0 {
                             timeRemaining -= 1
+                            if timeRemaining < 10 {
+                                timeRemainingString = "0\(timeRemaining)"
+                            }else {
+                                timeRemainingString = "\(timeRemaining)"
+                            }
                         }
                     }
                     .offset(x: -130, y: -300)
