@@ -12,27 +12,64 @@ struct ConnexionScreenView: View{
         GeometryReader { geometry in
             ZStack(alignment: .center){
                 BackgroundConnexionScreen()
-                VStack{
-                    Rectangle()
-                    Buttons()
-                }.frame(width: 306.13, height: geometry.size.height * 0.87 * 0.88)
+                VStack(alignment: .center){
+                    HStack(){
+                        Button(action: {
+                            print("d")
+                        }) {
+                            Image("Back_Button")
+                        }
+                        Spacer()
+                        Button(action: {
+                            print("d")
+                        }) {
+                            Image("Sound_Button")
+                        }
+                    }
+                    .padding(.horizontal)
+                    Spacer()
+                    Text("ESCOLHA SEU CIENTISTA PARCEIRO").font(.system(size: 24)).fontWeight(.medium).multilineTextAlignment(.center)
+                    Spacer()
+                    Button(action: {
+                        print("d")
+                    }) {
+                        MyButton(text: "Criar Sala", icon: "Add_Button", isBig: true)
+                    }
+                    Spacer()
+                    Button(action: {
+                        print("d")
+                    }) {
+                        MyButton(text: "Selecionar Parceiro", icon: "Find_Button", isBig: true)
+                    }
+                    Spacer()
+                    Button(action: {
+                        print("d")
+                    }) {
+                        MyButton(text: "Ranking", icon: "Rank_Button", isBig: false)
+                    }
+                    Spacer()
+                }
+                .padding(.vertical)
+                .frame(width: 306.13, height: geometry.size.height * 0.87 * 0.88)
                     .position(x: geometry.size.width * 0.5, y: geometry.size.height * 0.54)
             }
         }.edgesIgnoringSafeArea(.vertical)
     }
 }
 
-struct Buttons: View{
+struct MyButton: View{
     @State var text: String = "Testinho"
-    @State var spacing: CGFloat = 100
     @State var icon: String = "Add_Button"
+    @State var isBig: Bool = true
+    
     var body: some View{
         ZStack{
-            Image("Frame_Grande")
-            HStack(spacing: spacing){
-                Text(text)
+            Image({isBig ? "Frame_Grande" : "Frame_PEQUENO"}())
+            HStack{
+                Text(text).font(.system(size: 16)).foregroundColor(Color.black)
+                Spacer()
                 Image(icon)
-            }.frame(width: 264).background(.red)
+            }.padding(.horizontal).frame(width: 264)
         }
     }
 }
@@ -79,31 +116,11 @@ struct Clipboard: View {
             }
             .position(x: geometry.size.width * 0.5, y: geometry.size.height * 0.5)
         }
-        //.edgesIgnoringSafeArea(.vertical)
     }
 }
-
-//struct Clipboard: View {
-//    var body: some View{
-//        GeometryReader{ geometry in
-//            ZStack{
-//                GeometryReader{ zstack in
-//                    Image("board")
-//                        .resizable()
-//                        .frame(width: .infinity, height: zstack.size.height * 0.9155)
-//                        .position(x: zstack.size.width * 0.5, y: zstack.size.height * 0.5)
-//                    Image("clip")
-//                        .position(x: zstack.size.width * 0.5, y: 0)
-//                }
-//            }.position(x: geometry.size.width * 0.5, y: geometry.size.height * 0.5)
-//                .frame(width: 338.76, height: geometry.size.height * 0.87, alignment: .center)
-//        }.edgesIgnoringSafeArea(.vertical)
-//    }
-//}
 
 struct ConnexionScreen_Previews: PreviewProvider {
     static var previews: some View {
         ConnexionScreenView()
-        //Clipboard()
     }
 }

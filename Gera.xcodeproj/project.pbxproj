@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		476FF12C290861E50045E3DC /* BackgroundConnexionScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476FF12B290861E50045E3DC /* BackgroundConnexionScreen.swift */; };
+		476FF12C290861E50045E3DC /* ConnexionScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476FF12B290861E50045E3DC /* ConnexionScreenView.swift */; };
 		86BCF4A028F66F2100942758 /* GeraApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86BCF49F28F66F2100942758 /* GeraApp.swift */; };
 		86BCF4A228F66F2100942758 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86BCF4A128F66F2100942758 /* ContentView.swift */; };
 		86BCF4A428F66F2300942758 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 86BCF4A328F66F2300942758 /* Assets.xcassets */; };
@@ -22,7 +22,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		476FF12B290861E50045E3DC /* BackgroundConnexionScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundConnexionScreen.swift; sourceTree = "<group>"; };
+		476FF12B290861E50045E3DC /* ConnexionScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnexionScreenView.swift; sourceTree = "<group>"; };
 		8602D0FC290117A200C85A6B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		86BCF49C28F66F2100942758 /* Gera.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Gera.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		86BCF49F28F66F2100942758 /* GeraApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeraApp.swift; sourceTree = "<group>"; };
@@ -103,7 +103,7 @@
 				86DAA03429070B9300CD3577 /* StartScreenView.swift */,
 				86DAA03629070BA200CD3577 /* ColorTestView.swift */,
 				86DAA03829070BB600CD3577 /* ConnectScreenView.swift */,
-				476FF12B290861E50045E3DC /* BackgroundConnexionScreen.swift */,
+				476FF12B290861E50045E3DC /* ConnexionScreenView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -200,7 +200,7 @@
 				86DAA03529070B9300CD3577 /* StartScreenView.swift in Sources */,
 				86BCF4A028F66F2100942758 /* GeraApp.swift in Sources */,
 				86DAA03B29070C4F00CD3577 /* stylePlaceholder.swift in Sources */,
-				476FF12C290861E50045E3DC /* BackgroundConnexionScreen.swift in Sources */,
+				476FF12C290861E50045E3DC /* ConnexionScreenView.swift in Sources */,
 				86DAA03F29070C7B00CD3577 /* modelPlaceholder.swift in Sources */,
 				86DAA0412907246700CD3577 /* Color+hex.swift in Sources */,
 				86BCF4CE28FF23E100942758 /* GameConnectionManager.swift in Sources */,
