@@ -37,6 +37,9 @@ struct GameScreenView: View {
     let location4: CGPoint = CGPoint(x: 75, y: 245)
     let location5: CGPoint = CGPoint(x: 150, y: 245)
     
+    @State var timeRemaining = 30
+    let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+    
     @State var offset1: CGPoint = CGPoint(x: -150, y: 245)
     @State var offset2: CGPoint = CGPoint(x: -75, y: 245)
     @State var offset3: CGPoint = CGPoint(x: 0, y: 245)
@@ -204,17 +207,26 @@ struct GameScreenView: View {
                 }.offset(x: 130, y: -300)
                 Image("TEMPO")
                     .offset(x: -130, y: -300)
+                Text("00:\(timeRemaining)")
+                    .onReceive(timer) { _ in
+                        if timeRemaining > 0 {
+                            timeRemaining -= 1
+                        }
+                    }
+                    .offset(x: -130, y: -300)
+                    .fontWeight(.bold)
+                    .foregroundColor(Color(.white))
             }
             Group {
-                Image("p2_cyan")
+                Image("p1_cyan")
                     .offset(x: 150, y: -210)
-                Image("p2_brown")
+                Image("p1_brown")
                     .offset(x: 75, y: -210)
-                Image("p2_yellow")
+                Image("p1_yellow")
                     .offset(x: 0, y: -210)
-                Image("p2_lightGreen")
+                Image("p1_lightGreen")
                     .offset(x: -75, y: -210)
-                Image("p2_darkGreen")
+                Image("p1_darkGreen")
                     .offset(x: -150, y: -210)
             }
             Group {
@@ -222,20 +234,24 @@ struct GameScreenView: View {
                     .offset(y: 12)
                     
             }
-            RoundedRectangle(cornerRadius: 15)
-                .frame(width: 208, height: 16)
-                .foregroundColor(Color(hex: "FFF"))
-                .offset(y: -85)
-                .overlay {
-                    Rectangle()
-                        .frame(width: 104)
-                        .offset(x: -52, y: -85)
-                        .foregroundColor(colorLeft)
-                    Rectangle()
-                        .frame(width: 104)
-                        .offset(x: 52, y: -85)
-                        .foregroundColor(colorRight)
-                }
+            Group {
+                RoundedRectangle(cornerRadius: 15)
+                    .frame(width: 208, height: 16)
+                    .foregroundColor(Color(hex: "FFF"))
+                    .offset(y: -85)
+                    .overlay {
+                        Rectangle()
+                            .frame(width: 100)
+                            .offset(x: -52, y: -85)
+                            .foregroundColor(colorLeft)
+                        Rectangle()
+                            .frame(width: 100)
+                            .offset(x: 52, y: -85)
+                            .foregroundColor(colorRight)
+                    }
+                Image("barBorder")
+                    .offset(y: -85)
+            }
             Group {
                 Image("p1_purple")
                     .offset(CGSize(width: offset1.x, height: offset1.y))

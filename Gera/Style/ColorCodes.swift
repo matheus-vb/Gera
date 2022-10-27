@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 struct ColorCodes {
-    let BLUE = "0019fc"
+    let BLUE = "0019FC"
     let PURPLE = "420294"
     let RED = "AC1427"
     let PINK = "F700FC"
