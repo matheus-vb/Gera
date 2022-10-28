@@ -9,6 +9,11 @@ import SwiftUI
 
 struct ConnexionScreenView: View{
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    @State var isLoadingHidden: Bool = true
+    let aguardando = ["Aguardando seu companheiro.",
+                      "Aguardando seu companheiro..",
+                      "Aguardando seu companheiro..."]
+    @State var count: Int = 2
     var body: some View{
         GeometryReader { geometry in
             NavigationView{
@@ -17,7 +22,12 @@ struct ConnexionScreenView: View{
                     VStack(alignment: .center){
                         HStack(){
                             Button(action: {
-                                presentationMode.wrappedValue.dismiss()
+                                if isLoadingHidden{
+                                    presentationMode.wrappedValue.dismiss()
+                                }else{
+                                    isLoadingHidden = true
+                                }
+                                
                             }) {
                                 Image("Back_Button")
                             }
@@ -29,29 +39,45 @@ struct ConnexionScreenView: View{
                             }
                         }
                         .padding(.horizontal)
-                        Spacer()
-                        Text("ESCOLHA SEU CIENTISTA PARCEIRO").font(.system(size: 24)).fontWeight(.medium).multilineTextAlignment(.center)
-                        Spacer()
                         Group{
-                            Button(action: {
-                                print("d")
-                            }) {
-                                MyButton(text: "Criar Sala", icon: "Add_Button", isBig: true)
-                            }
                             Spacer()
-                            Button(action: {
-                                print("d")
-                            }) {
-                                MyButton(text: "Selecionar Parceiro", icon: "Find_Button", isBig: true)
-                            }
+                            Text("ESCOLHA SEU CIENTISTA PARCEIRO").font(.system(size: 24)).fontWeight(.medium).multilineTextAlignment(.center)
                             Spacer()
-                            Button(action: {
-                                print("d")
-                            }) {
-                                MyButton(text: "Ranking", icon: "Rank_Button", isBig: false)
+                            Group{
+                                Button(action: {
+                                    print("d")
+                                    isLoadingHidden = false
+                                }) {
+                                    MyButton(text: "Criar Sala", icon: "Add_Button", isBig: true)
+                                }
+                                Spacer()
+                                Button(action: {
+                                    print("d")
+                                }) {
+                                    MyButton(text: "Selecionar Parceiro", icon: "Find_Button", isBig: true)
+                                }
+                                Spacer()
+                                Button(action: {
+                                    print("d")
+                                }) {
+                                    MyButton(text: "Ranking", icon: "Rank_Button", isBig: false)
+                                }
+                                Spacer()
                             }
-                        }
-                        Spacer()
+                        }.isHidden(!isLoadingHidden, remove: !isLoadingHidden)
+                        Group{
+                            Text("Você está hospedando a sala").font(.system(size: 24)).fontWeight(.medium).multilineTextAlignment(.center).lineLimit(2).padding(.top)
+                            Spacer()
+                            Text(aguardando[count])
+                                .onAppear{
+                                    count = 0
+                                }
+                                .onChange(of: count) { value in
+                                    updateText()
+                                }
+                            Spacer()
+                            Spacer()
+                        }.isHidden(isLoadingHidden, remove: isLoadingHidden)
                     }
                     .padding(.vertical)
                     .frame(width: 306.13, height: geometry.size.height * 0.75)
@@ -60,6 +86,16 @@ struct ConnexionScreenView: View{
             }.navigationBarHidden(true)
                 .edgesIgnoringSafeArea(.vertical)
         }.edgesIgnoringSafeArea(.vertical)
+    }
+    
+    func updateText(){
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.75) {
+            if count == 0 || count == 1{
+                count += 1
+            }else{
+                count = 0
+            }
+        }
     }
 }
 
@@ -128,5 +164,32 @@ struct Clipboard: View {
 struct ConnexionScreen_Previews: PreviewProvider {
     static var previews: some View {
         ConnexionScreenView()
+    }
+}
+
+extension View {
+    /// Hide or show the view based on a boolean value.
+    ///
+    /// Example for visibility:
+    ///
+    ///     Text("Label")
+    ///         .isHidden(true)
+    ///
+    /// Example for complete removal:
+    ///
+    ///     Text("Label")
+    ///         .isHidden(true, remove: true)
+    ///
+    /// - Parameters:
+    ///   - hidden: Set to `false` to show the view. Set to `true` to hide the view.
+    ///   - remove: Boolean value indicating whether or not to remove the view.
+    @ViewBuilder func isHidden(_ hidden: Bool, remove: Bool = false) -> some View {
+        if hidden {
+            if !remove {
+                self.hidden()
+            }
+        } else {
+            self
+        }
     }
 }
