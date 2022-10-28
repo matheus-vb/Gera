@@ -30,27 +30,46 @@ struct RankingScreenView: View{
                             }
                         }
                         .padding(.horizontal)
-                        Spacer()
-                        Text("ESCOLHA SEU CIENTISTA PARCEIRO").font(.system(size: 24)).fontWeight(.medium).multilineTextAlignment(.center)
-                        Spacer()
-                        Button(action: {
-                            print("d")
-                        }) {
-                            MyButton(text: "Criar Sala", icon: "Add_Button", isBig: true)
+//
+                        VStack{
+                            Text("RANKING")
+                                .font(.system(size: 24))
+                                .fontWeight(.medium)
+                            VStack{
+                                Image("ranking")
+                                
+                                List{
+                                    ForEach(0..<30) {list in
+                                        ZStack{
+                                            
+                                            Image("ranking_rect")
+                                            // .resizable()
+                                                .frame(height: .infinity)
+                                            
+                                            HStack{
+                                                VStack{
+                                                    Text("nome do celular")
+                                                        .font(.system(size: 14))
+                                                        .fontWeight(.light)
+                                                        .multilineTextAlignment(.center)
+                                                    Text("vc terminou em X segundos")
+                                                        .font(.system(size: 14))
+                                                        .fontWeight(.light)
+                                                        .multilineTextAlignment(.leading)
+                                                }.frame(height: 66)
+                                                Spacer()
+                                                Image("First_Ranking")
+                                            }
+                                        }.padding(-1)
+                                    }
+                                }
+                                .frame(width: .infinity, height: .infinity)
+                                .navigationViewStyle(StackNavigationViewStyle())
+                                .scrollIndicators(.hidden)
+                                .frame(width: 306)
+                                
+                            }.padding(-1)
                         }
-                        Spacer()
-                        Button(action: {
-                            print("d")
-                        }) {
-                            MyButton(text: "Selecionar Parceiro", icon: "Find_Button", isBig: true)
-                        }
-                        Spacer()
-                        Button(action: {
-                            print("d")
-                        }) {
-                            MyButton(text: "Ranking", icon: "Rank_Button", isBig: false)
-                        }
-                        Spacer()
                     }
                     .padding(.vertical)
                     .frame(width: 306.13, height: geometry.size.height * 0.8)
