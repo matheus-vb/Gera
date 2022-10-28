@@ -19,6 +19,8 @@ class GameConnectionManager: NSObject, ObservableObject, MCSessionDelegate, MCAd
     
     @Published var connectedToGame = false
     @Published var color: Color
+    @Published var colorCode: String = "FFF"
+    @Published var isTurn: Bool = false
     
     let peerID: MCPeerID!
     var session: MCSession!
@@ -39,7 +41,8 @@ class GameConnectionManager: NSObject, ObservableObject, MCSessionDelegate, MCAd
         advertiseAssistant = MCNearbyServiceAdvertiser(peer: peerID, discoveryInfo: nil, serviceType: GameConnectionManager.serviceType)
         advertiseAssistant.delegate = self
         advertiseAssistant.startAdvertisingPeer()
-        connectedToGame = true
+        isTurn = true
+        //connectedToGame = true
         
         
 //        advertiseAssistant = MCAdvertiserAssistant(serviceType: GameConnectionManager.serviceType, discoveryInfo: nil, session: session)
@@ -52,6 +55,8 @@ class GameConnectionManager: NSObject, ObservableObject, MCSessionDelegate, MCAd
             let window = UIApplication.shared.windows.first,
             let session = session
         else { return }
+        
+        isTurn = false
         
         let browserViewController = MCBrowserViewController(serviceType: GameConnectionManager.serviceType, session: session)
         browserViewController.delegate = self
@@ -70,6 +75,7 @@ class GameConnectionManager: NSObject, ObservableObject, MCSessionDelegate, MCAd
         printDevices()
         do {
             try self.session.send(colorName.data(using: .utf8)!, toPeers: session.connectedPeers, with: .reliable)
+            isTurn = false
         } catch let error {
             print(error)
         }
@@ -77,6 +83,7 @@ class GameConnectionManager: NSObject, ObservableObject, MCSessionDelegate, MCAd
     
     func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID, withContext context: Data?, invitationHandler: @escaping (Bool, MCSession?) -> Void) {
         invitationHandler(true, session)
+        connectedToGame = true
     }
     
     
@@ -103,22 +110,14 @@ class GameConnectionManager: NSObject, ObservableObject, MCSessionDelegate, MCAd
     }
     
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
+        isTurn = true
+        
         let str = String(data: data, encoding: .utf8)!
         print(str)
         
-        if str == "red" {
-            DispatchQueue.main.async {
-                self.color = .red
-            }
-        } else if str == "blue" {
-            DispatchQueue.main.async {
-                self.color = .blue
-            }
+        DispatchQueue.main.async {
+            self.colorCode = str
         }
-        
-        
-
-//        self.delegate?.colorChanged(manager: self, colorName: str)
     }
     
     func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {

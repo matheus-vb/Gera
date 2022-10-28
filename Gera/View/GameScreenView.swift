@@ -15,6 +15,8 @@ struct GameScreenView: View {
     
     var playerColors: PlayerColors
     
+    @EnvironmentObject var gameConnectionManager: GameConnectionManager
+    
     let asset1: String
     let asset2: String
     let asset3: String
@@ -110,9 +112,12 @@ struct GameScreenView: View {
             }.onEnded { value in
                 withAnimation(.spring()) {
                     
-                    if value.location.y < 110 && value.location.y > -10 {
-                        withAnimation(.easeInOut(duration: 1.25)) {
+                    if value.location.y < 110 && value.location.y > -10 && gameConnectionManager.isTurn {
+                        gameConnectionManager.send(colorName: playerColors.color1)
+                        withAnimation(.easeInOut(duration: 0.5)) {
                             self.colorLeft = Color(hex: playerColors.color1)
+                        }
+                        withAnimation(.easeInOut(duration: 1)) {
                             self.offset1 = location1
                         }
                     }else {
@@ -137,9 +142,12 @@ struct GameScreenView: View {
             }.onEnded { value in
                 withAnimation(.spring()) {
                     
-                    if value.location.y < 110 && value.location.y > -10 {
-                        withAnimation(.easeInOut(duration: 1.25)) {
+                    if value.location.y < 110 && value.location.y > -10 && gameConnectionManager.isTurn {
+                        gameConnectionManager.send(colorName: playerColors.color2)
+                        withAnimation(.easeInOut(duration: 0.5)) {
                             self.colorLeft = Color(hex: playerColors.color2)
+                        }
+                        withAnimation(.easeInOut(duration: 1)) {
                             self.offset2 = location2
                         }
                     }else {
@@ -164,9 +172,12 @@ struct GameScreenView: View {
             }.onEnded { value in
                 withAnimation(.spring()) {
                     
-                    if value.location.y < 110 && value.location.y > -10 {
-                        withAnimation(.easeInOut(duration: 1.25)) {
+                    if value.location.y < 110 && value.location.y > -10 && gameConnectionManager.isTurn {
+                        gameConnectionManager.send(colorName: playerColors.color3)
+                        withAnimation(.easeInOut(duration: 0.5)) {
                             self.colorLeft = Color(hex: playerColors.color3)
+                        }
+                        withAnimation(.easeInOut(duration: 1)) {
                             self.offset3 = location3
                         }
                     }else {
@@ -191,9 +202,12 @@ struct GameScreenView: View {
             }.onEnded { value in
                 withAnimation(.spring()) {
                     
-                    if value.location.y < 110 && value.location.y > -10 {
-                        withAnimation(.easeInOut(duration: 1.25)) {
+                    if value.location.y < 110 && value.location.y > -10 && gameConnectionManager.isTurn {
+                        gameConnectionManager.send(colorName: playerColors.color4)
+                        withAnimation(.easeInOut(duration: 0.5)) {
                             self.colorLeft = Color(hex: playerColors.color4)
+                        }
+                        withAnimation(.easeInOut(duration: 1)) {
                             self.offset4 = location4
                         }
                     }else {
@@ -218,9 +232,12 @@ struct GameScreenView: View {
             }.onEnded { value in
                 withAnimation(.spring()) {
                     
-                    if value.location.y < 110 && value.location.y > -10 {
-                        withAnimation(.easeInOut(duration: 1.25)) {
+                    if value.location.y < 110 && value.location.y > -10 && gameConnectionManager.isTurn {
+                        gameConnectionManager.send(colorName: playerColors.color5)
+                        withAnimation(.easeInOut(duration: 0.5)) {
                             self.colorLeft = Color(hex: playerColors.color5)
+                        }
+                        withAnimation(.easeInOut(duration: 1)) {
                             self.offset5 = location5
                         }
                     }else {
@@ -297,7 +314,9 @@ struct GameScreenView: View {
                         Rectangle()
                             .frame(width: 100)
                             .offset(x: 52, y: -85)
-                            .foregroundColor(colorRight)
+                            .foregroundColor(Color(hex: gameConnectionManager.colorCode))
+                            .animation(.easeInOut(duration: 0.5), value: gameConnectionManager.colorCode)
+                        
                     }
                 Image("barBorder")
                     .offset(y: -85)
