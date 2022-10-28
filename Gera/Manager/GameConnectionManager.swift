@@ -39,7 +39,7 @@ class GameConnectionManager: NSObject, ObservableObject, MCSessionDelegate, MCAd
         advertiseAssistant = MCNearbyServiceAdvertiser(peer: peerID, discoveryInfo: nil, serviceType: GameConnectionManager.serviceType)
         advertiseAssistant.delegate = self
         advertiseAssistant.startAdvertisingPeer()
-        connectedToGame = true
+        //connectedToGame = true
         
         
 //        advertiseAssistant = MCAdvertiserAssistant(serviceType: GameConnectionManager.serviceType, discoveryInfo: nil, session: session)
@@ -77,6 +77,7 @@ class GameConnectionManager: NSObject, ObservableObject, MCSessionDelegate, MCAd
     
     func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID, withContext context: Data?, invitationHandler: @escaping (Bool, MCSession?) -> Void) {
         invitationHandler(true, session)
+        connectedToGame = true
     }
     
     
