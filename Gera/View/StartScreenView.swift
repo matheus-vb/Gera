@@ -127,7 +127,7 @@ struct StartScreenView: View {
                         .animation(.easeInOut(duration: 3).repeatForever(), value: animatingJ)
                 }
                 Group {
-                    NavigationLink(destination: ConnectScreenView(), label: {Image("buttonJogar")})
+                    NavigationLink(destination: ConnexionScreenView(), label: {Image("buttonJogar")})
                         .offset(y:260)
                     
                     Button(action: {
