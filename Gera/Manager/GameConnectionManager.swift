@@ -19,6 +19,7 @@ class GameConnectionManager: NSObject, ObservableObject, MCSessionDelegate, MCAd
     
     @Published var connectedToGame = false
     @Published var color: Color
+    @Published var colorCode: String = "FFF"
     
     let peerID: MCPeerID!
     var session: MCSession!
@@ -107,19 +108,9 @@ class GameConnectionManager: NSObject, ObservableObject, MCSessionDelegate, MCAd
         let str = String(data: data, encoding: .utf8)!
         print(str)
         
-        if str == "red" {
-            DispatchQueue.main.async {
-                self.color = .red
-            }
-        } else if str == "blue" {
-            DispatchQueue.main.async {
-                self.color = .blue
-            }
+        DispatchQueue.main.async {
+            self.colorCode = str
         }
-        
-        
-
-//        self.delegate?.colorChanged(manager: self, colorName: str)
     }
     
     func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {
