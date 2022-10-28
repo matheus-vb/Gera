@@ -21,7 +21,7 @@ struct HelpScreenView: View{
                             }) {
                                 Image("Back_Button")
                             }
-                           Spacer()
+                            Spacer()
                             Button(action: {
                                 print("d")
                             }) {
@@ -37,42 +37,39 @@ struct HelpScreenView: View{
                                 .fontWeight(.medium)
                                 .multilineTextAlignment(.center)
                                 .frame(width: 300, height: 100)
-                            
+                            Spacer()
                             
                             Text("Salve a humanidade de uma terrível bactéria em 30 segundos")
                                 .font(.system(size: 14))
                                 .fontWeight(.light)
                                 .multilineTextAlignment(.center)
-                                .frame(width: 300, height: 40)
-                           
+                                .frame(width: 250, height: 40)
+                            Spacer()
                             
                             Image("Foto_Bacteria")
-                           
-                            
+                        }
+                        
+                        VStack{
                             Text("Você e seu cientista parceiro devem misturar compostos para descobrir o antibiótico correto.")
                                 .font(.system(size: 14))
                                 .fontWeight(.light)
                                 .multilineTextAlignment(.leading)
-                                .frame(width: 300, height: 60)
-                       
-                      
-                        
-                   
-                            HStack{
-                                Image("Foto_Compostos")
-                                Image("Foto_Barrinha")
-                            }
-                           
-                            
-                            Text("A cada mistura as cores selecionadas serão indicadas na barrinha acima.")
-                              .font(.system(size: 14))
-                              .fontWeight(.light)
-                              .multilineTextAlignment(.leading)
-                              .frame(width: 300, height: 60)
+                                .frame(width: 250, height: 60)
                             Spacer()
-                        }
-                       
+                            
+                            Image("Foto_Ajuda")
+                                .frame(width: 100, height: 100)
                         
+                        
+                        
+                        Text("A cada mistura as cores selecionadas serão indicadas na barrinha acima.")
+                            .font(.system(size: 14))
+                            .fontWeight(.light)
+                            .multilineTextAlignment(.leading)
+                            .frame(width: 250, height: 60)
+                        Spacer()
+                    }
+                   
                        
                     }
                     .padding(.vertical)
