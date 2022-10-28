@@ -32,27 +32,29 @@ struct ConnexionScreenView: View{
                         Spacer()
                         Text("ESCOLHA SEU CIENTISTA PARCEIRO").font(.system(size: 24)).fontWeight(.medium).multilineTextAlignment(.center)
                         Spacer()
-                        Button(action: {
-                            print("d")
-                        }) {
-                            MyButton(text: "Criar Sala", icon: "Add_Button", isBig: true)
-                        }
-                        Spacer()
-                        Button(action: {
-                            print("d")
-                        }) {
-                            MyButton(text: "Selecionar Parceiro", icon: "Find_Button", isBig: true)
-                        }
-                        Spacer()
-                        Button(action: {
-                            print("d")
-                        }) {
-                            MyButton(text: "Ranking", icon: "Rank_Button", isBig: false)
+                        Group{
+                            Button(action: {
+                                print("d")
+                            }) {
+                                MyButton(text: "Criar Sala", icon: "Add_Button", isBig: true)
+                            }
+                            Spacer()
+                            Button(action: {
+                                print("d")
+                            }) {
+                                MyButton(text: "Selecionar Parceiro", icon: "Find_Button", isBig: true)
+                            }
+                            Spacer()
+                            Button(action: {
+                                print("d")
+                            }) {
+                                MyButton(text: "Ranking", icon: "Rank_Button", isBig: false)
+                            }
                         }
                         Spacer()
                     }
                     .padding(.vertical)
-                    .frame(width: 306.13, height: geometry.size.height * 0.8)
+                    .frame(width: 306.13, height: geometry.size.height * 0.75)
                     .position(x: geometry.size.width * 0.5, y: geometry.size.height * 0.5)
                 }
             }.navigationBarHidden(true)
