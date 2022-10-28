@@ -8,7 +8,6 @@
 import Foundation
 import SwiftUI
 
-
 struct GameScreenView: View {
     
     let player: Int

@@ -42,12 +42,6 @@ class GameConnectionManager: NSObject, ObservableObject, MCSessionDelegate, MCAd
         advertiseAssistant.delegate = self
         advertiseAssistant.startAdvertisingPeer()
         isTurn = true
-        //connectedToGame = true
-        
-        
-//        advertiseAssistant = MCAdvertiserAssistant(serviceType: GameConnectionManager.serviceType, discoveryInfo: nil, session: session)
-//        advertiseAssistant.delegate = self
-//        advertiseAssistant.start()
     }
     
     func joinGame() {
@@ -110,7 +104,10 @@ class GameConnectionManager: NSObject, ObservableObject, MCSessionDelegate, MCAd
     }
     
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
-        isTurn = true
+        
+        DispatchQueue.main.async {
+            self.isTurn = true
+        }
         
         let str = String(data: data, encoding: .utf8)!
         print(str)
