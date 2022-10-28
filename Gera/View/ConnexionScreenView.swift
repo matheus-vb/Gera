@@ -9,6 +9,8 @@ import SwiftUI
 
 struct ConnexionScreenView: View{
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    @ObservedObject private var gameConnectionManager = GameConnectionManager()
+    @State var isHost = false
     @State var isLoadingHidden: Bool = true
     let aguardando = ["Aguardando seu companheiro.",
                       "Aguardando seu companheiro..",
@@ -47,12 +49,16 @@ struct ConnexionScreenView: View{
                                 Button(action: {
                                     print("d")
                                     isLoadingHidden = false
+                                    self.isHost = true
+                                    gameConnectionManager.hostGame()
                                 }) {
                                     MyButton(text: "Criar Sala", icon: "Add_Button", isBig: true)
                                 }
                                 Spacer()
                                 Button(action: {
                                     print("d")
+                                    gameConnectionManager.joinGame()
+                                    gameConnectionManager.printDevices()
                                 }) {
                                     MyButton(text: "Selecionar Parceiro", icon: "Find_Button", isBig: true)
                                 }
@@ -86,6 +92,9 @@ struct ConnexionScreenView: View{
             }.navigationBarHidden(true)
                 .edgesIgnoringSafeArea(.vertical)
         }.edgesIgnoringSafeArea(.vertical)
+        NavigationLink(destination: GameScreenView(player: isHost ? 1 : 2).environmentObject(gameConnectionManager), isActive: $gameConnectionManager.connectedToGame) {
+            EmptyView()
+        }
     }
     
     func updateText(){
