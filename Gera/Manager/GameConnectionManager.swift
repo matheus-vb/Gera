@@ -20,6 +20,7 @@ class GameConnectionManager: NSObject, ObservableObject, MCSessionDelegate, MCAd
     @Published var connectedToGame = false
     @Published var color: Color
     @Published var colorCode: String = "FFF"
+    @Published var isTurn: Bool = false
     
     let peerID: MCPeerID!
     var session: MCSession!
@@ -40,6 +41,7 @@ class GameConnectionManager: NSObject, ObservableObject, MCSessionDelegate, MCAd
         advertiseAssistant = MCNearbyServiceAdvertiser(peer: peerID, discoveryInfo: nil, serviceType: GameConnectionManager.serviceType)
         advertiseAssistant.delegate = self
         advertiseAssistant.startAdvertisingPeer()
+        isTurn = true
         //connectedToGame = true
         
         
@@ -53,6 +55,8 @@ class GameConnectionManager: NSObject, ObservableObject, MCSessionDelegate, MCAd
             let window = UIApplication.shared.windows.first,
             let session = session
         else { return }
+        
+        isTurn = false
         
         let browserViewController = MCBrowserViewController(serviceType: GameConnectionManager.serviceType, session: session)
         browserViewController.delegate = self
@@ -71,6 +75,7 @@ class GameConnectionManager: NSObject, ObservableObject, MCSessionDelegate, MCAd
         printDevices()
         do {
             try self.session.send(colorName.data(using: .utf8)!, toPeers: session.connectedPeers, with: .reliable)
+            isTurn = false
         } catch let error {
             print(error)
         }
@@ -105,6 +110,8 @@ class GameConnectionManager: NSObject, ObservableObject, MCSessionDelegate, MCAd
     }
     
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
+        isTurn = true
+        
         let str = String(data: data, encoding: .utf8)!
         print(str)
         

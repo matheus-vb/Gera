@@ -112,7 +112,7 @@ struct GameScreenView: View {
             }.onEnded { value in
                 withAnimation(.spring()) {
                     
-                    if value.location.y < 110 && value.location.y > -10 {
+                    if value.location.y < 110 && value.location.y > -10 && gameConnectionManager.isTurn {
                         gameConnectionManager.send(colorName: playerColors.color1)
                         withAnimation(.easeInOut(duration: 0.5)) {
                             self.colorLeft = Color(hex: playerColors.color1)
@@ -142,7 +142,7 @@ struct GameScreenView: View {
             }.onEnded { value in
                 withAnimation(.spring()) {
                     
-                    if value.location.y < 110 && value.location.y > -10 {
+                    if value.location.y < 110 && value.location.y > -10 && gameConnectionManager.isTurn {
                         gameConnectionManager.send(colorName: playerColors.color2)
                         withAnimation(.easeInOut(duration: 0.5)) {
                             self.colorLeft = Color(hex: playerColors.color2)
@@ -172,7 +172,7 @@ struct GameScreenView: View {
             }.onEnded { value in
                 withAnimation(.spring()) {
                     
-                    if value.location.y < 110 && value.location.y > -10 {
+                    if value.location.y < 110 && value.location.y > -10 && gameConnectionManager.isTurn {
                         gameConnectionManager.send(colorName: playerColors.color3)
                         withAnimation(.easeInOut(duration: 0.5)) {
                             self.colorLeft = Color(hex: playerColors.color3)
@@ -202,7 +202,7 @@ struct GameScreenView: View {
             }.onEnded { value in
                 withAnimation(.spring()) {
                     
-                    if value.location.y < 110 && value.location.y > -10 {
+                    if value.location.y < 110 && value.location.y > -10 && gameConnectionManager.isTurn {
                         gameConnectionManager.send(colorName: playerColors.color4)
                         withAnimation(.easeInOut(duration: 0.5)) {
                             self.colorLeft = Color(hex: playerColors.color4)
@@ -232,7 +232,7 @@ struct GameScreenView: View {
             }.onEnded { value in
                 withAnimation(.spring()) {
                     
-                    if value.location.y < 110 && value.location.y > -10 {
+                    if value.location.y < 110 && value.location.y > -10 && gameConnectionManager.isTurn {
                         gameConnectionManager.send(colorName: playerColors.color5)
                         withAnimation(.easeInOut(duration: 0.5)) {
                             self.colorLeft = Color(hex: playerColors.color5)
