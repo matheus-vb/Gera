@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		476FF12C290861E50045E3DC /* ConnexionScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476FF12B290861E50045E3DC /* ConnexionScreenView.swift */; };
+		47BCD28D2910112B00F72938 /* NotificationsConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47BCD28C2910112B00F72938 /* NotificationsConfiguration.swift */; };
+		47BCD28F29101F3B00F72938 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47BCD28E29101F3B00F72938 /* AppDelegate.swift */; };
 		869F96BD290B0B5E0026B9D3 /* ColorCodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869F96BC290B0B5E0026B9D3 /* ColorCodes.swift */; };
 		869F96BF290B0C850026B9D3 /* PlayerColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869F96BE290B0C850026B9D3 /* PlayerColors.swift */; };
 		86BC6C3F2910052400339778 /* PopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86BC6C3C2910052400339778 /* PopupView.swift */; };
@@ -29,6 +31,8 @@
 
 /* Begin PBXFileReference section */
 		476FF12B290861E50045E3DC /* ConnexionScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnexionScreenView.swift; sourceTree = "<group>"; };
+		47BCD28C2910112B00F72938 /* NotificationsConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsConfiguration.swift; sourceTree = "<group>"; };
+		47BCD28E29101F3B00F72938 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8602D0FC290117A200C85A6B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		869F96BC290B0B5E0026B9D3 /* ColorCodes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorCodes.swift; sourceTree = "<group>"; };
 		869F96BE290B0C850026B9D3 /* PlayerColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerColors.swift; sourceTree = "<group>"; };
@@ -87,6 +91,7 @@
 				86DAA03029070A0100CD3577 /* Model */,
 				8602D0FC290117A200C85A6B /* Info.plist */,
 				86BCF49F28F66F2100942758 /* GeraApp.swift */,
+				47BCD28E29101F3B00F72938 /* AppDelegate.swift */,
 				86BCF4A328F66F2300942758 /* Assets.xcassets */,
 				86BCF4A528F66F2300942758 /* Preview Content */,
 			);
@@ -129,6 +134,7 @@
 			isa = PBXGroup;
 			children = (
 				86BCF4CD28FF23E100942758 /* GameConnectionManager.swift */,
+				47BCD28C2910112B00F72938 /* NotificationsConfiguration.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -214,6 +220,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				86BCF4A228F66F2100942758 /* ContentView.swift in Sources */,
+				47BCD28D2910112B00F72938 /* NotificationsConfiguration.swift in Sources */,
 				869F96BF290B0C850026B9D3 /* PlayerColors.swift in Sources */,
 				86DAA03729070BA200CD3577 /* ColorTestView.swift in Sources */,
 				86DAA03529070B9300CD3577 /* StartScreenView.swift in Sources */,
@@ -224,6 +231,7 @@
 				86BC6C412910052400339778 /* PopupGameOver.swift in Sources */,
 				86BC6C3F2910052400339778 /* PopupView.swift in Sources */,
 				86DAA03B29070C4F00CD3577 /* stylePlaceholder.swift in Sources */,
+				47BCD28F29101F3B00F72938 /* AppDelegate.swift in Sources */,
 				476FF12C290861E50045E3DC /* ConnexionScreenView.swift in Sources */,
 				86DAA03F29070C7B00CD3577 /* modelPlaceholder.swift in Sources */,
 				86DAA0412907246700CD3577 /* Color+hex.swift in Sources */,
