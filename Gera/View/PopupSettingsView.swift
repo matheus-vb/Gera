@@ -21,7 +21,7 @@ struct Settings : View {
                     .edgesIgnoringSafeArea(.all)
                     .opacity(0.5)
                 
-                Image("clipboard")
+                Image("clipboard1")
                     .offset(y:-50)
                 
                 Button (action: {

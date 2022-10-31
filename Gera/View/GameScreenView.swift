@@ -349,6 +349,7 @@ struct GameScreenView: View {
 struct GameScreenView_Previews: PreviewProvider {
     static var previews: some View {
         GameScreenView(player: 2)
+            .environmentObject(GameConnectionManager())
     }
 }
 
