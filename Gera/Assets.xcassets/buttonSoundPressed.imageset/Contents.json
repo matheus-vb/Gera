@@ -1,0 +1,23 @@
+{
+  "images" : [
+    {
+      "filename" : "PopUp_Sound_PRESSED.png",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "filename" : "PopUp_Sound_PRESSED@2x.png",
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "filename" : "PopUp_Sound_PRESSED@3x.png",
+      "idiom" : "universal",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
