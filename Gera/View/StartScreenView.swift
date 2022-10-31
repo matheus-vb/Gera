@@ -7,10 +7,13 @@
 
 import Foundation
 import SwiftUI
+import AVFoundation
 
 struct StartScreenView: View {
     @State var animatingI = false
     @State var animatingJ = true
+    
+    @State var audioPlayer: AVAudioPlayer!
     
     let gradient = Gradient(colors: [
         Color(hex: "7DD2EC"),
@@ -19,7 +22,7 @@ struct StartScreenView: View {
         Color(hex: "112E56"),
         Color(hex: "112E56")
     ])
-        
+    
     var body: some View {
         NavigationView() {
             ZStack {
@@ -143,8 +146,13 @@ struct StartScreenView: View {
                         Image("buttonSound")
                     }
                     .offset(x: 130,y: -300)
-
+                    
                 }
+            }.onAppear {
+                let sound = Bundle.main.path(forResource: "backMusic", ofType: "mp3")
+                self.audioPlayer = try! AVAudioPlayer(contentsOf: URL(fileURLWithPath: sound!))
+                audioPlayer.play()
+                audioPlayer.numberOfLoops = -1
             }
         }
     }
