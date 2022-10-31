@@ -76,7 +76,7 @@ struct Settings : View {
                 
             }
         }
-        }
+    }
 }
 
 struct Settings_Previews: PreviewProvider {

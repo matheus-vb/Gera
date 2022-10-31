@@ -7,9 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		476FF12C290861E50045E3DC /* ConnexionScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476FF12B290861E50045E3DC /* ConnexionScreenView.swift */; };
 		869F96BD290B0B5E0026B9D3 /* ColorCodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869F96BC290B0B5E0026B9D3 /* ColorCodes.swift */; };
 		869F96BF290B0C850026B9D3 /* PlayerColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869F96BE290B0C850026B9D3 /* PlayerColors.swift */; };
-		476FF12C290861E50045E3DC /* ConnexionScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476FF12B290861E50045E3DC /* ConnexionScreenView.swift */; };
+		86BC6C3F2910052400339778 /* PopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86BC6C3C2910052400339778 /* PopupView.swift */; };
+		86BC6C402910052400339778 /* PopupSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86BC6C3D2910052400339778 /* PopupSettingsView.swift */; };
+		86BC6C412910052400339778 /* PopupGameOver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86BC6C3E2910052400339778 /* PopupGameOver.swift */; };
 		86BCF4A028F66F2100942758 /* GeraApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86BCF49F28F66F2100942758 /* GeraApp.swift */; };
 		86BCF4A228F66F2100942758 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86BCF4A128F66F2100942758 /* ContentView.swift */; };
 		86BCF4A428F66F2300942758 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 86BCF4A328F66F2300942758 /* Assets.xcassets */; };
@@ -29,6 +32,9 @@
 		8602D0FC290117A200C85A6B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		869F96BC290B0B5E0026B9D3 /* ColorCodes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorCodes.swift; sourceTree = "<group>"; };
 		869F96BE290B0C850026B9D3 /* PlayerColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerColors.swift; sourceTree = "<group>"; };
+		86BC6C3C2910052400339778 /* PopupView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PopupView.swift; path = Gera/View/PopupView.swift; sourceTree = SOURCE_ROOT; };
+		86BC6C3D2910052400339778 /* PopupSettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PopupSettingsView.swift; path = Gera/View/PopupSettingsView.swift; sourceTree = SOURCE_ROOT; };
+		86BC6C3E2910052400339778 /* PopupGameOver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PopupGameOver.swift; path = Gera/View/PopupGameOver.swift; sourceTree = SOURCE_ROOT; };
 		86BCF49C28F66F2100942758 /* Gera.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Gera.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		86BCF49F28F66F2100942758 /* GeraApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeraApp.swift; sourceTree = "<group>"; };
 		86BCF4A128F66F2100942758 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -107,6 +113,9 @@
 		86DAA03129070A0700CD3577 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				86BC6C3E2910052400339778 /* PopupGameOver.swift */,
+				86BC6C3D2910052400339778 /* PopupSettingsView.swift */,
+				86BC6C3C2910052400339778 /* PopupView.swift */,
 				86DAA03429070B9300CD3577 /* StartScreenView.swift */,
 				86DAA04229086B8200CD3577 /* GameScreenView.swift */,
 				86DAA03629070BA200CD3577 /* ColorTestView.swift */,
@@ -210,7 +219,10 @@
 				86DAA03529070B9300CD3577 /* StartScreenView.swift in Sources */,
 				86BCF4A028F66F2100942758 /* GeraApp.swift in Sources */,
 				869F96BD290B0B5E0026B9D3 /* ColorCodes.swift in Sources */,
+				86BC6C402910052400339778 /* PopupSettingsView.swift in Sources */,
 				86DAA04329086B8200CD3577 /* GameScreenView.swift in Sources */,
+				86BC6C412910052400339778 /* PopupGameOver.swift in Sources */,
+				86BC6C3F2910052400339778 /* PopupView.swift in Sources */,
 				86DAA03B29070C4F00CD3577 /* stylePlaceholder.swift in Sources */,
 				476FF12C290861E50045E3DC /* ConnexionScreenView.swift in Sources */,
 				86DAA03F29070C7B00CD3577 /* modelPlaceholder.swift in Sources */,
