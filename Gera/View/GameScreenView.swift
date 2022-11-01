@@ -28,6 +28,8 @@ struct GameScreenView: View {
     let asset9: String
     let asset10: String
     
+    let pathBounds = UIBezierPath.calculateBounds(paths: [.bac1path1, .bac1path2, .bac1path3, .bac1path4, .bac1path5, .bac1path6, .bac1path7, .bac1path8, .bac1path9, .bac1path10, .bac1path11, .bac1path12, .bac1path13, .bac1path14, .bac1path15, .bac1path16, .bac1path17, .bac1path18, .bac1path19, .bac1path20, .bac1path21, .bac1path22, .bac1path23, .bac1path24, .bac1path25, .bac1path26, .bac1path27, .bac1path28, .bac1path29, .bac1path30, .bac1path31, .bac1path32, .bac1path33, .bac1path34, .bac1path35, .bac1path36, .bac1path37, .bac1path38, .bac1path39, .bac1path40, .bac1path41, .bac1path42, .bac1path43, .bac1path44, .bac1path45])
+    
     @State var gameStarted: Bool = false
     @State var playerTwoPlayed: Bool = false
     
@@ -233,11 +235,6 @@ struct GameScreenView: View {
                         .offset(y: 50)
                     Image("Mesa_SUPERIOR")
                         .offset(y: -180)
-                    Rectangle()
-                        .frame(width: 200, height: 100)
-                        .foregroundColor(Color(hex: currColor))
-                        .animation(.easeIn, value: currColor)
-                        .task(delayBacteria)
                 }
                 Group {
                     Button(action: {
@@ -285,11 +282,6 @@ struct GameScreenView: View {
                         .offset(x: -120, y: -210)
                 }
                 Group {
-                    Image("bac1Game")
-                        .offset(y: 12)
-                }
-                
-                Group {
                     RoundedRectangle(cornerRadius: 15)
                         .frame(width: 208, height: 16)
                         .foregroundColor(Color(hex: gameConnectionManager.mixColor))
@@ -316,6 +308,26 @@ struct GameScreenView: View {
                         .animation(.spring(), value: missed)
                     
                 }
+                Group {
+                    Image("Costas_Pote")
+                        .offset(y: 42)
+                    BacteriaShapeView(color: currColor)
+                        .frame(width: 60)
+                        .scaleEffect(1)
+                        .offset(x: -2, y: 410)
+                        .animation(.easeIn, value: currColor)
+                        .task(delayBacteria)
+                    Image("bacShadow")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .offset(x: -1,y: 20)
+                        .frame(width: 63)
+                    Image("Frente_Pote")
+                        .offset(y: 10)
+                        .opacity(0.8)
+                }
+                
+                    
             }.navigationBarBackButtonHidden(true)
         }
     }
