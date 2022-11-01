@@ -6,8 +6,12 @@
 //
 
 import SwiftUI
+import AVFoundation
 
 struct Congratulations: View {
+    @State var audioPlayer: AVAudioPlayer!
+    @State var audioPlayer2: AVAudioPlayer!
+    
     var time: String = "01:01"
     var body: some View {
         NavigationView(){
@@ -32,34 +36,35 @@ struct Congratulations: View {
                 
                 NavigationLink (destination: StartScreenView(), label: {
                     Image("buttonHome")
+                })  .simultaneousGesture(TapGesture().onEnded{
+                    let sound = Bundle.main.path(forResource: "clickSound", ofType: "wav")
+                    self.audioPlayer2 = try! AVAudioPlayer(contentsOf: URL(fileURLWithPath: sound!))
+                    audioPlayer2.play()
                 })
                 .offset(x: -80, y: 124)
                 
+                
                 Button(action: {
+                    let sound = Bundle.main.path(forResource: "clickSound", ofType: "wav")
+                    self.audioPlayer2 = try! AVAudioPlayer(contentsOf: URL(fileURLWithPath: sound!))
+                    audioPlayer2.play()
+                    
                     // colocar uma navigation link
                 }) {
                     Image("buttonReload")
                     
                 }.offset(x: 80, y: 124)
                 
+                
+            }.onAppear {
+                let sound = Bundle.main.path(forResource: "Ganhou_2_PopUp", ofType: "wav")
+                self.audioPlayer = try! AVAudioPlayer(contentsOf: URL(fileURLWithPath: sound!))
+                audioPlayer.play()
             }
-        }
-        }
+            
+        }.navigationBarBackButtonHidden(true)
+    }
 }
-//struct BlurView: UIViewRepresentable {
-//
-//    func makeUIView(context: Context) -> UIVisualEffectView {
-//        let view = UIVisualEffectView(effect: UIBlurEffect(style: .regular))
-//
-//
-//        return view
-//
-//    }
-//
-//    func updateUIView(_ uiView: UIVisualEffectView, context: Context) {
-//
-//    }
-//}
 
 struct Congratulations_Previews: PreviewProvider {
     static var previews: some View {

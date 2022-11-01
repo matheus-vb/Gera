@@ -6,8 +6,11 @@
 //
 
 import SwiftUI
+import AVFoundation
 
 struct GameOver : View {
+    @State var audioPlayer: AVAudioPlayer!
+    @State var audioPlayer2: AVAudioPlayer!
     var time: String = "01:01"
     
     var body: some View {
@@ -36,22 +39,31 @@ struct GameOver : View {
                     .fontWeight(.semibold)
                 
                 NavigationLink (destination: StartScreenView(), label: {
-                    Image("buttonExit")
+                    Image("buttonHome")
+                }).simultaneousGesture(TapGesture().onEnded{
+                    let sound = Bundle.main.path(forResource: "clickSound", ofType: "wav")
+                    self.audioPlayer2 = try! AVAudioPlayer(contentsOf: URL(fileURLWithPath: sound!))
+                    audioPlayer2.play()
                 })
                 .offset(x: -80, y: 100)
                 
                 Button(action: {
+                    let sound = Bundle.main.path(forResource: "clickSound", ofType: "wav")
+                    self.audioPlayer2 = try! AVAudioPlayer(contentsOf: URL(fileURLWithPath: sound!))
+                    audioPlayer2.play()
                     // colocar uma navigation link
                 }) {
-                    Image("buttonHome")
+                    Image("buttonReload")
                     
                 }.offset(x: 80, y: 100)
                 
+            }.onAppear {
+                let sound = Bundle.main.path(forResource: "gameOverSound", ofType: "wav")
+                self.audioPlayer = try! AVAudioPlayer(contentsOf: URL(fileURLWithPath: sound!))
+                audioPlayer.play()
             }
-//            relogio
-//            feedback qnd um jogar
             
-        }
+        }.navigationBarBackButtonHidden(true)
     }
 }
 

@@ -154,7 +154,7 @@ struct StartScreenView: View {
                 audioPlayer.play()
                 audioPlayer.numberOfLoops = -1
             }
-        }
+        }.navigationBarBackButtonHidden(true)
     }
 }
 

@@ -6,11 +6,14 @@
 //
 
 import SwiftUI
+import AVFoundation
 
 struct Settings : View {
-    @State var sound : Bool = false
+    @State var click : Bool = false
     @State var music : Bool = false
     @State var notification : Bool = false
+    @State var audioPlayer2: AVAudioPlayer!
+    
     
     var body: some View {
         NavigationView (){
@@ -24,12 +27,6 @@ struct Settings : View {
                 Image("clipboard1")
                     .offset(y:-50)
                 
-                Button (action: {
-                    
-                }) {
-                    Image("buttonClose")
-                        .offset(x: 100 ,y: -180)
-                }
                 
                 Text("Configurações")
                     .multilineTextAlignment(.center)
@@ -39,15 +36,32 @@ struct Settings : View {
                     .frame(width: 171)
                 
                 Button (action: {
-                    sound.toggle()
+                    let sound = Bundle.main.path(forResource: "clickSound", ofType: "wav")
+                    self.audioPlayer2 = try! AVAudioPlayer(contentsOf: URL(fileURLWithPath: sound!))
+                    audioPlayer2.play()
+                }) {
+                    Image("buttonClose")
+                }
+                .offset(x: 100 ,y: -180)
+                
+                Button (action: {
+                    click.toggle()
+                    let sound = Bundle.main.path(forResource: "clickSound", ofType: "wav")
+                    self.audioPlayer2 = try! AVAudioPlayer(contentsOf: URL(fileURLWithPath: sound!))
+                    audioPlayer2.play()
                     // colocar uma navigation link
                 }) {
-                    Image(sound ? "buttonSoundPressed" : "buttonSound1")
+                    Image(click ? "buttonSoundPressed" : "buttonSound1")
+                    
+                    
                 }
                 .offset(y: -80)
                 
                 Button (action: {
                     music.toggle()
+                    let sound = Bundle.main.path(forResource: "clickSound", ofType: "wav")
+                    self.audioPlayer2 = try! AVAudioPlayer(contentsOf: URL(fileURLWithPath: sound!))
+                    audioPlayer2.play()
                     // colocar uma navigation link
                 }) {
                     Image(music ? "buttonMusicPressed" : "buttonMusic")
@@ -56,6 +70,9 @@ struct Settings : View {
                 
                 Button (action: {
                     notification.toggle()
+                    let sound = Bundle.main.path(forResource: "clickSound", ofType: "wav")
+                    self.audioPlayer2 = try! AVAudioPlayer(contentsOf: URL(fileURLWithPath: sound!))
+                    audioPlayer2.play()
                     // colocar uma navigation link
                 }) {
                     Image(notification ? "buttonNotificationPressed" : "buttonNotification")
@@ -64,18 +81,26 @@ struct Settings : View {
                 
                 NavigationLink (destination: StartScreenView(), label: {
                     Image("buttonHome")
+                }).simultaneousGesture(TapGesture().onEnded{
+                    let sound = Bundle.main.path(forResource: "clickSound", ofType: "wav")
+                    self.audioPlayer2 = try! AVAudioPlayer(contentsOf: URL(fileURLWithPath: sound!))
+                    audioPlayer2.play()
                 })
                 .offset(x: -80, y: 100)
                 
                 Button(action: {
+                    let sound = Bundle.main.path(forResource: "clickSound", ofType: "wav")
+                    self.audioPlayer2 = try! AVAudioPlayer(contentsOf: URL(fileURLWithPath: sound!))
+                    audioPlayer2.play()
+                    
                     // colocar uma navigation link
                 }) {
-                    Image("buttonReload")
+                    Image("buttonQuestion")
                     
                 }.offset(x: 80, y: 100)
                 
             }
-        }
+        }.navigationBarBackButtonHidden(true)
     }
 }
 
