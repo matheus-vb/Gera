@@ -7,15 +7,27 @@
 
 import SwiftUI
 
+var images: [UIImage]! = [
+    UIImage(named: "LOADINGGIF1")!,
+    UIImage(named: "LOADINGGIF2")!,
+    UIImage(named: "LOADINGGIF3")!,
+    UIImage(named: "LOADINGGIF4")!,
+    UIImage(named: "LOADINGGIF5")!,
+    UIImage(named: "LOADINGGIF6")!,
+    UIImage(named: "LOADINGGIF7")!,
+    UIImage(named: "LOADINGGIF8")!,
+    UIImage(named: "LOADINGGIF9")!,
+    
+]
+let animatedImage = UIImage.animatedImage(with: images, duration: 0.5)
+
 struct ConnexionScreenView: View{
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @ObservedObject private var gameConnectionManager = GameConnectionManager()
     @State var isHost = false
     @State var isLoadingHidden: Bool = true
-    let aguardando = ["Aguardando seu companheiro.",
-                      "Aguardando seu companheiro..",
-                      "Aguardando seu companheiro..."]
-    @State var count: Int = 2
+    @State var isStarting: Bool = false
+    
     var body: some View{
         GeometryReader { geometry in
             NavigationView{
@@ -28,6 +40,7 @@ struct ConnexionScreenView: View{
                                     presentationMode.wrappedValue.dismiss()
                                 }else{
                                     isLoadingHidden = true
+                                    isStarting = false
                                 }
                                 
                             }) {
@@ -36,6 +49,7 @@ struct ConnexionScreenView: View{
                             Spacer()
                             Button(action: {
                                 print("d")
+                                NotificationConfiguration.sendNotification(withConfiguration: NotificationConfiguration.notificationContent()[0])
                             }) {
                                 Image("Sound_Button")
                             }
@@ -59,12 +73,16 @@ struct ConnexionScreenView: View{
                                     print("d")
                                     gameConnectionManager.joinGame()
                                     gameConnectionManager.printDevices()
+                                    isLoadingHidden = false
+                                    isStarting = true
+                                    
                                 }) {
                                     MyButton(text: "Selecionar Parceiro", icon: "Find_Button", isBig: true)
                                 }
                                 Spacer()
                                 Button(action: {
                                     print("d")
+                                    NotificationConfiguration.askForPermission()
                                 }) {
                                     MyButton(text: "Ranking", icon: "Rank_Button", isBig: false)
                                 }
@@ -72,17 +90,7 @@ struct ConnexionScreenView: View{
                             }
                         }.isHidden(!isLoadingHidden, remove: !isLoadingHidden)
                         Group{
-                            Text("Você está hospedando a sala").font(.system(size: 24)).fontWeight(.medium).multilineTextAlignment(.center).lineLimit(2).padding(.top)
-                            Spacer()
-                            Text(aguardando[count])
-                                .onAppear{
-                                    count = 0
-                                }
-                                .onChange(of: count) { value in
-                                    updateText()
-                                }
-                            Spacer()
-                            Spacer()
+                            LoadingView(geometry: geometry, isStarting: isStarting)
                         }.isHidden(isLoadingHidden, remove: isLoadingHidden)
                     }
                     .padding(.vertical)
@@ -97,6 +105,59 @@ struct ConnexionScreenView: View{
         }
     }
     
+    
+}
+
+struct LoadingView: View{
+    let geometry: GeometryProxy
+    let isStarting: Bool
+    let player: String = "Player 1"
+    let titulo: String
+    let aguardando: [String]
+    let image: String
+    @State var count: Int = 2
+    
+    init(geometry: GeometryProxy, isStarting: Bool) {
+        self.geometry = geometry
+        self.isStarting = isStarting
+        
+        if isStarting{
+            aguardando = ["Aguarde o início da partida.",
+                          "Aguarde o início da partida..",
+                          "Aguarde o início da partida..."]
+            self.titulo = "Você entrou na sala de \(player)"
+            self.image = "partnerImage"
+        }else{
+            aguardando = ["Aguardando seu companheiro.",
+                          "Aguardando seu companheiro..",
+                          "Aguardando seu companheiro..."]
+            self.titulo = "Você está hospedando a sala"
+            self.image = "hostImage"
+        }
+    }
+    
+    var body: some View{
+        Text(titulo).font(.system(size: 24)).fontWeight(.medium).multilineTextAlignment(.center).lineLimit(2).padding(.top)
+        Spacer()
+        Image(image)
+        Spacer()
+        ZStack{
+            Image("loadingBG")
+            LoadingAnimation()
+                .position(x: geometry.size.width*0.5 + 6, y: 20.5)
+        }.frame(width: 324, height: 30, alignment: .center)
+        Spacer()
+        Text(aguardando[count])
+            .onAppear{
+                count = 0
+            }
+            .onChange(of: count) { value in
+                updateText()
+            }
+        Spacer()
+        Spacer()
+    }
+    
     func updateText(){
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.75) {
             if count == 0 || count == 1{
@@ -106,6 +167,24 @@ struct ConnexionScreenView: View{
             }
         }
     }
+}
+
+struct LoadingAnimation: UIViewRepresentable {
+    func makeUIView(context: Self.Context) -> UIView {
+            let someView = UIView(frame: CGRect(x: 0, y: 0, width: 265, height: 10))
+            let someImage = UIImageView(frame: CGRect(x: 0, y: 0, width: 265, height: 10))
+            someImage.clipsToBounds = true
+            someImage.layer.cornerRadius = 20
+            someImage.autoresizesSubviews = true
+            someImage.contentMode = UIView.ContentMode.scaleAspectFill
+            someImage.image = animatedImage
+            someView.addSubview(someImage)
+            return someView
+        }
+
+        func updateUIView(_ uiView: UIView, context: UIViewRepresentableContext<LoadingAnimation>) {
+
+        }
 }
 
 struct MyButton: View{
@@ -173,6 +252,7 @@ struct Clipboard: View {
 struct ConnexionScreen_Previews: PreviewProvider {
     static var previews: some View {
         ConnexionScreenView()
+        //LoadingAnimation()
     }
 }
 
