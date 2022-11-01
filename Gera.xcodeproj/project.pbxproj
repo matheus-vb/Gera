@@ -120,6 +120,7 @@
 		86DAA03029070A0100CD3577 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				47BCD28C2910112B00F72938 /* NotificationsConfiguration.swift */,
 				86DAA03E29070C7B00CD3577 /* modelPlaceholder.swift */,
 				869F96BE290B0C850026B9D3 /* PlayerColors.swift */,
 			);
@@ -145,7 +146,6 @@
 			isa = PBXGroup;
 			children = (
 				86BCF4CD28FF23E100942758 /* GameConnectionManager.swift */,
-				47BCD28C2910112B00F72938 /* NotificationsConfiguration.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
