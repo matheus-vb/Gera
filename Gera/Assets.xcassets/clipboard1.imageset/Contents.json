@@ -1,15 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "Rosa.png",
+      "filename" : "PopUp_PRANCHETA.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "PopUp_PRANCHETA@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
+      "filename" : "PopUp_PRANCHETA@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
