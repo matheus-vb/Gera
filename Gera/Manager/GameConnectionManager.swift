@@ -28,6 +28,9 @@ class GameConnectionManager: NSObject, ObservableObject, MCSessionDelegate, MCAd
     @Published var colorJoin: String = "FFF"
     @Published var mixColor: String = "FFF"
     
+    @Published var hostPlayed: Bool = false
+    @Published var joinPlayed: Bool = false
+    
     let peerID: MCPeerID!
     var session: MCSession!
     var advertiseAssistant: MCNearbyServiceAdvertiser!
@@ -72,7 +75,7 @@ class GameConnectionManager: NSObject, ObservableObject, MCSessionDelegate, MCAd
         }
     }
 
-    func getMix(player1: String, player2: String) {
+    func getMix(player1: String, player2: String) async {
         let colors = ColorCodes()
         
         print("player1: \(player1)")
@@ -82,43 +85,76 @@ class GameConnectionManager: NSObject, ObservableObject, MCSessionDelegate, MCAd
         print(colors.ORANGE)
         
         if player1 == colors.RED && player2 == colors.ORANGE {
-            self.mixColor = colors.REDpORANGE
+            DispatchQueue.main.async {
+                self.mixColor = colors.REDpORANGE
+            }
         }
         if player1 == colors.RED && player2 == colors.PURPLE {
-            self.mixColor = colors.REDpPURPLE
+            DispatchQueue.main.async {
+                self.mixColor = colors.REDpPURPLE
+            }
         }
         if player1 == colors.RED && player2 == colors.DARK_GREEN {
-            self.mixColor = colors.REDpGREEN
+            DispatchQueue.main.async {
+                self.mixColor = colors.REDpGREEN
+            }
         }
         if player1 == colors.YELLOW && player2 == colors.ORANGE {
-            self.mixColor = colors.YELLOWpORANGE
+            DispatchQueue.main.async {
+                self.mixColor = colors.YELLOWpORANGE
+            }
         }
         if player1 == colors.YELLOW && player2 == colors.PURPLE {
-            self.mixColor = colors.YELLOWpPURPLE
+            DispatchQueue.main.async {
+                self.mixColor = colors.YELLOWpPURPLE
+            }
         }
         if player1 == colors.YELLOW && player2 == colors.DARK_GREEN {
-            self.mixColor = colors.YELLOWpGREEN
+            DispatchQueue.main.async {
+                self.mixColor = colors.YELLOWpGREEN
+            }
         }
         if player1 == colors.BLUE && player2 == colors.ORANGE {
-            self.mixColor = colors.BLUEpORANGE
+            DispatchQueue.main.async {
+                self.mixColor = colors.BLUEpORANGE
+            }
         }
         if player1 == colors.BLUE && player2 == colors.PURPLE {
-            self.mixColor = colors.BLUEpPURPLE
+            DispatchQueue.main.async {
+                self.mixColor = colors.BLUEpPURPLE
+            }
         }
         if player1 == colors.BLUE && player2 == colors.DARK_GREEN {
-            self.mixColor = colors.BLUEpGREEN
-        } 
+            DispatchQueue.main.async {
+                self.mixColor = colors.BLUEpGREEN
+            }
+        }
+        
+        if hostPlayed && joinPlayed {
+            try? await Task.sleep(nanoseconds: 1_000_000_000)
+            DispatchQueue.main.async {
+                self.mixColor = "FFF"
+                self.colorHost = "FFF"
+                self.colorJoin = "FFF"
+            }
+        }
+        
     }
     
     func send(colorName: String) {
         
         if isHost {
             self.colorHost = colorName
+            self.hostPlayed = true
+            self.joinPlayed = false
         } else if !isHost {
             self.colorJoin = colorName
+            self.hostPlayed = true
+            self.joinPlayed = true
         }
-        
-        getMix(player1: colorHost, player2: colorJoin)
+        Task{
+            await getMix(player1: colorHost, player2: colorJoin)
+        }
         
         do {
             try self.session.send(colorName.data(using: .utf8)!, toPeers: session.connectedPeers, with: .reliable)
@@ -175,11 +211,17 @@ class GameConnectionManager: NSObject, ObservableObject, MCSessionDelegate, MCAd
             self.colorCode = str
             if self.isHost {
                 self.colorJoin = str
+                self.hostPlayed = true
+                self.joinPlayed = true
             } else if !self.isHost {
                 self.colorHost = str
+                self.joinPlayed = false
+                self.hostPlayed = true
             }
             
-            self.getMix(player1: self.colorHost, player2: self.colorJoin)
+            Task {
+                await self.getMix(player1: self.colorHost, player2: self.colorJoin)
+            }
 
         }
     }
