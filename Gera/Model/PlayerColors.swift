@@ -25,15 +25,15 @@ struct PlayerColors {
         self.player = player
         
         if player == 1 {
-            color1 = colorCodes.PURPLE
-            color2 = colorCodes.ORANGE
-            color3 = colorCodes.RED
+            color1 = colorCodes.YELLOW
+            color2 = colorCodes.RED
+            color3 = colorCodes.BLUE
             color4 = colorCodes.BLUE
             color5 = colorCodes.PINK
         } else if player == 2 {
-            color1 = colorCodes.DARK_GREEN
-            color2 = colorCodes.LIGHT_GREEN
-            color3 = colorCodes.YELLOW
+            color1 = colorCodes.ORANGE
+            color2 = colorCodes.DARK_GREEN
+            color3 = colorCodes.PURPLE
             color4 = colorCodes.BROWN
             color5 = colorCodes.CYAN
         } else {
