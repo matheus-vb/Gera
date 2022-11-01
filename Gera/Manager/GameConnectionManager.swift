@@ -21,6 +21,12 @@ class GameConnectionManager: NSObject, ObservableObject, MCSessionDelegate, MCAd
     @Published var color: Color
     @Published var colorCode: String = "FFF"
     @Published var isTurn: Bool = false
+    @Published var changed: Bool = false
+    
+    @Published var isHost: Bool = false
+    @Published var colorHost: String = "FFF"
+    @Published var colorJoin: String = "FFF"
+    @Published var mixColor: String = "FFF"
     
     let peerID: MCPeerID!
     var session: MCSession!
@@ -42,6 +48,7 @@ class GameConnectionManager: NSObject, ObservableObject, MCSessionDelegate, MCAd
         advertiseAssistant.delegate = self
         advertiseAssistant.startAdvertisingPeer()
         isTurn = true
+        isHost = true
     }
     
     func joinGame() {
@@ -65,11 +72,58 @@ class GameConnectionManager: NSObject, ObservableObject, MCSessionDelegate, MCAd
         }
     }
 
+    func getMix(player1: String, player2: String) {
+        let colors = ColorCodes()
+        
+        print("player1: \(player1)")
+        print("player2: \(player2)")
+        print("-----------")
+        print(colors.RED)
+        print(colors.ORANGE)
+        
+        if player1 == colors.RED && player2 == colors.ORANGE {
+            self.mixColor = colors.REDpORANGE
+        }
+        if player1 == colors.RED && player2 == colors.PURPLE {
+            self.mixColor = colors.REDpPURPLE
+        }
+        if player1 == colors.RED && player2 == colors.DARK_GREEN {
+            self.mixColor = colors.REDpGREEN
+        }
+        if player1 == colors.YELLOW && player2 == colors.ORANGE {
+            self.mixColor = colors.YELLOWpORANGE
+        }
+        if player1 == colors.YELLOW && player2 == colors.PURPLE {
+            self.mixColor = colors.YELLOWpPURPLE
+        }
+        if player1 == colors.YELLOW && player2 == colors.DARK_GREEN {
+            self.mixColor = colors.YELLOWpGREEN
+        }
+        if player1 == colors.BLUE && player2 == colors.ORANGE {
+            self.mixColor = colors.BLUEpORANGE
+        }
+        if player1 == colors.BLUE && player2 == colors.PURPLE {
+            self.mixColor = colors.BLUEpPURPLE
+        }
+        if player1 == colors.BLUE && player2 == colors.DARK_GREEN {
+            self.mixColor = colors.BLUEpGREEN
+        } 
+    }
+    
     func send(colorName: String) {
-        printDevices()
+        
+        if isHost {
+            self.colorHost = colorName
+        } else if !isHost {
+            self.colorJoin = colorName
+        }
+        
+        getMix(player1: colorHost, player2: colorJoin)
+        
         do {
             try self.session.send(colorName.data(using: .utf8)!, toPeers: session.connectedPeers, with: .reliable)
             isTurn = false
+            changed.toggle()
         } catch let error {
             print(error)
         }
@@ -77,7 +131,9 @@ class GameConnectionManager: NSObject, ObservableObject, MCSessionDelegate, MCAd
     
     func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID, withContext context: Data?, invitationHandler: @escaping (Bool, MCSession?) -> Void) {
         invitationHandler(true, session)
-        connectedToGame = true
+        DispatchQueue.main.async {
+            self.connectedToGame = true
+        }
     }
     
     
@@ -99,7 +155,9 @@ class GameConnectionManager: NSObject, ObservableObject, MCSessionDelegate, MCAd
             print("Connecting: \(peerID.displayName)")
         } else if state == MCSessionState.notConnected {
             print("Not connected: \(peerID.displayName)")
-            connectedToGame = false
+            DispatchQueue.main.async {
+                self.connectedToGame = false
+            }
         }
     }
     
@@ -107,6 +165,7 @@ class GameConnectionManager: NSObject, ObservableObject, MCSessionDelegate, MCAd
         
         DispatchQueue.main.async {
             self.isTurn = true
+            self.changed.toggle()
         }
         
         let str = String(data: data, encoding: .utf8)!
@@ -114,6 +173,14 @@ class GameConnectionManager: NSObject, ObservableObject, MCSessionDelegate, MCAd
         
         DispatchQueue.main.async {
             self.colorCode = str
+            if self.isHost {
+                self.colorJoin = str
+            } else if !self.isHost {
+                self.colorHost = str
+            }
+            
+            self.getMix(player1: self.colorHost, player2: self.colorJoin)
+
         }
     }
     

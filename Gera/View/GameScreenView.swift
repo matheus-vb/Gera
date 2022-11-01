@@ -28,68 +28,29 @@ struct GameScreenView: View {
     let asset9: String
     let asset10: String
     
-    init(player: Int) {
-        self.player = player
-        
-        if player == 1 {
-            playerColors = PlayerColors(player: 1)
-            asset1 = "p1_purple"
-            asset2 = "p1_orange"
-            asset3 = "p1_red"
-            asset4 = "p1_blue"
-            asset5 = "p1_pink"
-            asset6 = "p1_darkGreen"
-            asset7 = "p1_lightGreen"
-            asset8 = "p1_yellow"
-            asset9 = "p1_brown"
-            asset10 = "p1_cyan"
-            
-        } else if player == 2 {
-            playerColors = PlayerColors(player: 2)
-            asset1 = "p2_darkGreen"
-            asset2 = "p2_lightGreen"
-            asset3 = "p2_yellow"
-            asset4 = "p2_brown"
-            asset5 = "p2_cyan"
-            asset6 = "p2_purple"
-            asset7 = "p2_orange"
-            asset8 = "p2_red"
-            asset9 = "p2_blue"
-            asset10 = "p2_pink"
-            
-        } else {
-            playerColors = PlayerColors(player: 0)
-            asset1 = "p1_purple"
-            asset2 = "p1_orange"
-            asset3 = "p1_red"
-            asset4 = "p1_blue"
-            asset5 = "p1_pink"
-            asset6 = "p1_lightGreen"
-            asset7 = "p1_darkGreen"
-            asset8 = "p1_yellow"
-            asset9 = "p1_brown"
-            asset10 = "p1_cyan"
-        }
-    }
-    
-    @State var playerOnePlayed: Bool = false
+    @State var gameStarted: Bool = false
     @State var playerTwoPlayed: Bool = false
     
-    let location1: CGPoint = CGPoint(x: -150, y: 245)
-    let location2: CGPoint = CGPoint(x: -75, y: 245)
-    let location3: CGPoint = CGPoint(x: 0, y: 245)
-    let location4: CGPoint = CGPoint(x: 75, y: 245)
-    let location5: CGPoint = CGPoint(x: 150, y: 245)
+    @State var missed: Bool = false
+    @State var missOpacity: Double = 0
+    
+    @State var currColor = "FFF"
+    @State var playerOneColor = ""
+    @State var mixColor = "FFF"
+    
+    @State var gameOver: Bool = false
+    
+    let location1: CGPoint = CGPoint(x: -120, y: 245)
+    let location2: CGPoint = CGPoint(x: 0, y: 245)
+    let location3: CGPoint = CGPoint(x: 120, y: 245)
     
     @State var timeRemaining = 30
     @State var timeRemainingString = "30"
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
-    @State var offset1: CGPoint = CGPoint(x: -150, y: 245)
-    @State var offset2: CGPoint = CGPoint(x: -75, y: 245)
-    @State var offset3: CGPoint = CGPoint(x: 0, y: 245)
-    @State var offset4: CGPoint = CGPoint(x: 75, y: 245)
-    @State var offset5: CGPoint = CGPoint(x: 150, y: 245)
+    @State var offset1: CGPoint = CGPoint(x: -120, y: 245)
+    @State var offset2: CGPoint = CGPoint(x: 0, y: 245)
+    @State var offset3: CGPoint = CGPoint(x: 120, y: 245)
     
     @State var colorLeft: Color = Color(hex: "FFF")
     @State var colorRight: Color = Color(hex: "FFF")
@@ -115,10 +76,19 @@ struct GameScreenView: View {
                         gameConnectionManager.send(colorName: playerColors.color1)
                         withAnimation(.easeInOut(duration: 0.5)) {
                             self.colorLeft = Color(hex: playerColors.color1)
+                            self.playerOneColor = playerColors.color1
                         }
                         withAnimation(.easeInOut(duration: 1)) {
                             self.offset1 = location1
                         }
+                        
+                        if player == 1 {
+                            self.playerTwoPlayed = false
+                            self.gameStarted = true
+                        } else if player == 2 {
+                            self.playerTwoPlayed = true
+                        }
+                        
                     }else {
                         self.offset1 = location1
                     }
@@ -145,10 +115,19 @@ struct GameScreenView: View {
                         gameConnectionManager.send(colorName: playerColors.color2)
                         withAnimation(.easeInOut(duration: 0.5)) {
                             self.colorLeft = Color(hex: playerColors.color2)
+                            self.playerOneColor = playerColors.color2
                         }
                         withAnimation(.easeInOut(duration: 1)) {
                             self.offset2 = location2
                         }
+                        
+                        if player == 1 {
+                            self.playerTwoPlayed = false
+                            self.gameStarted = true
+                        } else if player == 2 {
+                            self.playerTwoPlayed = true
+                        }
+                        
                     }else {
                         self.offset2 = location2
                     }
@@ -175,10 +154,19 @@ struct GameScreenView: View {
                         gameConnectionManager.send(colorName: playerColors.color3)
                         withAnimation(.easeInOut(duration: 0.5)) {
                             self.colorLeft = Color(hex: playerColors.color3)
+                            self.playerOneColor = playerColors.color3
                         }
                         withAnimation(.easeInOut(duration: 1)) {
                             self.offset3 = location3
                         }
+                        
+                        if player == 1 {
+                            self.playerTwoPlayed = false
+                            self.gameStarted = true
+                        } else if player == 2 {
+                            self.playerTwoPlayed = true
+                        }
+                        
                     }else {
                         self.offset3 = location3
                     }
@@ -186,169 +174,203 @@ struct GameScreenView: View {
             }
     }
     
-    //MARK: - Blue drag
-    var dragGesture4: some Gesture {
-        DragGesture()
-            .onChanged { value in
-                var newLocation = startLocation ?? offset4 // 3
-                newLocation.x += value.translation.width
-                newLocation.y += value.translation.height
-                withAnimation(.spring()) {
-                    self.offset4 = newLocation
-                }
-            }.updating($startLocation) { (value, startLocation, transaction) in
-                startLocation = startLocation ?? offset4 // 2
-            }.onEnded { value in
-                withAnimation(.spring()) {
-                    
-                    if value.location.y < 110 && value.location.y > -10 && gameConnectionManager.isTurn {
-                        gameConnectionManager.send(colorName: playerColors.color4)
-                        withAnimation(.easeInOut(duration: 0.5)) {
-                            self.colorLeft = Color(hex: playerColors.color4)
-                        }
-                        withAnimation(.easeInOut(duration: 1)) {
-                            self.offset4 = location4
-                        }
-                    }else {
-                        self.offset4 = location4
-                    }
-                }
-            }
+    init(player: Int) {
+        self.player = player
+        
+        if player == 1 {
+            playerColors = PlayerColors(player: 1)
+            asset1 = "p1_yellow"
+            asset2 = "p1_red"
+            asset3 = "p1_blue"
+            asset4 = "p1_blue"
+            asset5 = "p1_pink"
+            
+            asset6 = "p1_purple"
+            asset7 = "p1_darkGreen"
+            asset8 = "p1_orange"
+            asset9 = "p1_brown"
+            asset10 = "p1_cyan"
+            
+        } else if player == 2 {
+            playerColors = PlayerColors(player: 2)
+            asset1 = "p2_orange"
+            asset2 = "p2_darkGreen"
+            asset3 = "p2_purple"
+            asset4 = "p2_brown"
+            asset5 = "p2_cyan"
+            
+            asset6 = "p2_blue"
+            asset7 = "p2_red"
+            asset8 = "p2_yellow"
+            asset9 = "p2_blue"
+            asset10 = "p2_pink"
+            
+        } else {
+            playerColors = PlayerColors(player: 0)
+            asset1 = "p1_purple"
+            asset2 = "p1_orange"
+            asset3 = "p1_red"
+            asset4 = "p1_blue"
+            asset5 = "p1_pink"
+            asset6 = "p1_lightGreen"
+            asset7 = "p1_darkGreen"
+            asset8 = "p1_yellow"
+            asset9 = "p1_brown"
+            asset10 = "p1_cyan"
+        }
     }
-    
-    //MARK: - Pink drag
-    var dragGesture5: some Gesture {
-        DragGesture()
-            .onChanged { value in
-                var newLocation = startLocation ?? offset5 // 3
-                newLocation.x += value.translation.width
-                newLocation.y += value.translation.height
-                withAnimation(.spring()) {
-                    self.offset5 = newLocation
-                }
-            }.updating($startLocation) { (value, startLocation, transaction) in
-                startLocation = startLocation ?? offset5 // 2
-            }.onEnded { value in
-                withAnimation(.spring()) {
-                    
-                    if value.location.y < 110 && value.location.y > -10 && gameConnectionManager.isTurn {
-                        gameConnectionManager.send(colorName: playerColors.color5)
-                        withAnimation(.easeInOut(duration: 0.5)) {
-                            self.colorLeft = Color(hex: playerColors.color5)
-                        }
-                        withAnimation(.easeInOut(duration: 1)) {
-                            self.offset5 = location5
-                        }
-                    }else {
-                        self.offset5 = location5
-                    }
-                }
-            }
-    }
-    
     
     //MARK: - VIEW BODY
     var body: some View {
-        ZStack {
-            Color(hex: "112E56")
-                .edgesIgnoringSafeArea(.all)
-            Group {
-                Image("Mesa_INFERIOR")
-                    .offset(y: 320)
-                Image("Mesa_MEIO")
-                    .offset(y: 50)
-                Image("Mesa_SUPERIOR")
-                    .offset(y: -180)
-            }
-            Group {
-                Button(action: {
-                    //config view
-                }) {
-                    Image("Config_Button")
-                }.offset(x: 130, y: -300)
-                Image("TEMPO")
-                    .offset(x: -130, y: -300)
-                Text("00:\(timeRemainingString)")
-                    .onReceive(timer) { _ in
-                        if timeRemaining > 0 {
-                            timeRemaining -= 1
-                            if timeRemaining < 10 {
-                                timeRemainingString = "0\(timeRemaining)"
-                            }else {
-                                timeRemainingString = "\(timeRemaining)"
+        NavigationView() {
+            ZStack {
+                Color(hex: "112E56")
+                    .edgesIgnoringSafeArea(.all)
+                Group {
+                    Image("Mesa_INFERIOR")
+                        .offset(y: 320)
+                    Image("Mesa_MEIO")
+                        .offset(y: 50)
+                    Image("Mesa_SUPERIOR")
+                        .offset(y: -180)
+                    Rectangle()
+                        .frame(width: 200, height: 100)
+                        .foregroundColor(Color(hex: currColor))
+                        .animation(.easeIn, value: currColor)
+                        .task(delayBacteria)
+                }
+                Group {
+                    Button(action: {
+                        //config view
+                        
+                        
+                    }) {
+                        Image("Config_Button")
+                    }.offset(x: 130, y: -300)
+                    Image("Relogio")
+                        .offset(x: 0, y: -316)
+                    Text("00:\(timeRemainingString)")
+                        .onReceive(timer) { _ in
+                            if timeRemaining > 0 {
+                                timeRemaining -= 1
+                                if timeRemaining < 10 {
+                                    timeRemainingString = "0\(timeRemaining)"
+                                }else {
+                                    timeRemainingString = "\(timeRemaining)"
+                                }
+                            }else if timeRemaining == 0 {
+                                self.gameOver = true
                             }
                         }
-                    }
-                    .offset(x: -130, y: -300)
-                    .fontWeight(.bold)
-                    .foregroundColor(Color(.white))
-            }
-            Group {
-                Image(asset10)
-                    .offset(x: 150, y: -210)
-                Image(asset9)
-                    .offset(x: 75, y: -210)
-                Image(asset8)
-                    .offset(x: 0, y: -210)
-                Image(asset7)
-                    .offset(x: -75, y: -210)
-                Image(asset6)
-                    .offset(x: -150, y: -210)
-            }
-            Group {
-                Image("bacteria_PH")
-                    .offset(y: 12)
+                        .offset(y: -300)
+                        .font(.system(size: 24))
+                        .fontWeight(.medium)
                     
-            }
-            Group {
-                RoundedRectangle(cornerRadius: 15)
-                    .frame(width: 208, height: 16)
-                    .foregroundColor(Color(hex: "FFF"))
-                    .offset(y: -85)
-                    .overlay {
-                        Rectangle()
-                            .frame(width: 100)
-                            .offset(x: -52, y: -85)
-                            .foregroundColor(colorLeft)
-                        Rectangle()
-                            .frame(width: 100)
-                            .offset(x: 52, y: -85)
-                            .foregroundColor(Color(hex: gameConnectionManager.colorCode))
-                            .animation(.easeInOut(duration: 0.5), value: gameConnectionManager.colorCode)
-                        
+                    Button(action: {
+                        missed.toggle()
+                        Task {
+                            await delayAnimation()
+                        }
+                    }){
+                        Image("buttonExit")
                     }
-                Image("barBorder")
-                    .offset(y: -85)
+                    .offset(x:-130, y: -300)
+                }
+                Group {
+                    Image(asset8)
+                        .offset(x: 120, y: -210)
+                    Image(asset7)
+                        .offset(x: 0, y: -210)
+                    Image(asset6)
+                        .offset(x: -120, y: -210)
+                }
+                Group {
+                    Image("bac1Game")
+                        .offset(y: 12)
+                }
+                
+                Group {
+                    RoundedRectangle(cornerRadius: 15)
+                        .frame(width: 208, height: 16)
+                        .foregroundColor(Color(hex: gameConnectionManager.mixColor))
+                        .offset(y: -85)
+                        .task(checkResult)
+                    Image("barBorder")
+                        .offset(y: -85)
+                }
+                Group {
+                    Image(asset1)
+                        .offset(CGSize(width: offset1.x, height: offset1.y))
+                        .gesture(dragGesture1)
+                    
+                    Image(asset2)
+                        .offset(CGSize(width: offset2.x, height: offset2.y))
+                        .gesture(dragGesture2)
+                    
+                    Image(asset3)
+                        .offset(CGSize(width: offset3.x, height: offset3.y))
+                        .gesture(dragGesture3)
+                    Image("miss_Screen")
+                        .offset(y: -5)
+                        .opacity(missed ? 1 : 0)
+                        .animation(.spring(), value: missed)
+                    
+                }
+            }.navigationBarBackButtonHidden(true)
+        }
+    }
+    
+    private func checkResult() async {
+        while(true) {
+            if currColor == gameConnectionManager.mixColor {
+                print("-----DONE-----")
             }
-            Group {
-                Image(asset1)
-                    .offset(CGSize(width: offset1.x, height: offset1.y))
-                    .gesture(dragGesture1)
-                
-                Image(asset2)
-                    .offset(CGSize(width: offset2.x, height: offset2.y))
-                    .gesture(dragGesture2)
-                
-                Image(asset3)
-                    .offset(CGSize(width: offset3.x, height: offset3.y))
-                    .gesture(dragGesture3)
-                
-                Image(asset4)
-                    .offset(CGSize(width: offset4.x, height: offset4.y))
-                    .gesture(dragGesture4)
-                
-                Image(asset5)
-                    .offset(CGSize(width: offset5.x, height: offset5.y))
-                    .gesture(dragGesture5)
-                
-            }
+            try? await Task.sleep(nanoseconds: 100_000_000)
+        }
+    }
+    
+    private func delayAnimation() async {
+        try? await Task.sleep(nanoseconds: 3_000_000_000)
+        missed.toggle()
+    }
+    
+    private func delayBacteria() async {
+        let colors = ColorCodes()
+        
+        while(true) {
+            currColor = colors.YELLOWpGREEN
+            try? await Task.sleep(nanoseconds: 500_000_000)
+            
+            currColor = colors.YELLOWpORANGE
+            try? await Task.sleep(nanoseconds: 500_000_000)
+            
+            currColor = colors.YELLOWpPURPLE
+            try? await Task.sleep(nanoseconds: 500_000_000)
+            
+            currColor = colors.REDpGREEN
+            try? await Task.sleep(nanoseconds: 500_000_000)
+            
+            currColor = colors.REDpORANGE
+            try? await Task.sleep(nanoseconds: 500_000_000)
+            
+            currColor = colors.REDpPURPLE
+            try? await Task.sleep(nanoseconds: 500_000_000)
+            
+            currColor = colors.BLUEpGREEN
+            try? await Task.sleep(nanoseconds: 500_000_000)
+            
+            currColor = colors.BLUEpORANGE
+            try? await Task.sleep(nanoseconds: 500_000_000)
+            
+            currColor = colors.BLUEpPURPLE
+            try? await Task.sleep(nanoseconds: 500_000_000)
         }
     }
 }
 
 struct GameScreenView_Previews: PreviewProvider {
     static var previews: some View {
-        GameScreenView(player: 2)
+        GameScreenView(player: 1)
             .environmentObject(GameConnectionManager())
     }
 }

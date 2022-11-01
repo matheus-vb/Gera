@@ -19,5 +19,15 @@ struct ColorCodes {
     let CYAN = "00F0FF"
     let YELLOW = "FFD244"
     let BROWN = "C98500"
+    
+    let REDpORANGE = "D55529"
+    let REDpPURPLE = "992D7A"
+    let REDpGREEN = "876A33"
+    let YELLOWpORANGE = "FFAF42"
+    let YELLOWpPURPLE = "BD859B"
+    let YELLOWpGREEN = "A7C952"
+    let BLUEpORANGE = "8E899C"
+    let BLUEpPURPLE = "6657B8"
+    let BLUEpGREEN = "449BA4"
 }
 
