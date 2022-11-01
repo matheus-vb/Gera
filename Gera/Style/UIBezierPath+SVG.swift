@@ -623,4 +623,11 @@ extension UIBezierPath {
         return path
     }
     
+    static var bac1path46: UIBezierPath {
+        let path = UIBezierPath()
+        path.move(to: CGPoint(x: 11, y: 38))
+        path.addArc(withCenter: CGPoint(x: 36, y: 38), radius: 25, startAngle: 0, endAngle: .pi * 2, clockwise: true)
+        return path
+    }
+    
 }
