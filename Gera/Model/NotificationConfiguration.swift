@@ -20,8 +20,20 @@ extension NotificationConfiguration{
     static func notificationContent() -> [NotificationConfiguration]{
         return[
             NotificationConfiguration(
-                title: "Olinda foi atingida!",
-                body: "Cientistas não obtêm sucesso e a bactéria se espalha para cidades vizinhas"
+                title: "Jornal Internacional",
+                body: "É a nossa última chance! A bactéria desconhecida já atingiu metade do globo."
+            ),
+            NotificationConfiguration(
+                title: "Jornal Nacional",
+                body: "A bactéria ocupou o país inteiro! Você tem poucas tentativas agora..."
+            ),
+            NotificationConfiguration(
+                title: "Jornal da Região",
+                body: "A bactéria não para de se espalhar! A situação é alarmante!"
+            ),
+            NotificationConfiguration(
+                title: "Jornal Local",
+                body: "A bactéria se espalhou para cidades vizinhas"
             ),
             
         ]

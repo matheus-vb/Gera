@@ -435,6 +435,7 @@ struct GameScreenView: View {
         while(true) {
             if currColor != gameConnectionManager.mixColor && gameConnectionManager.mixColor != "FFF" {
                 self.remainingTries -= 1
+                NotificationConfiguration.sendNotification(withConfiguration: NotificationConfiguration.notificationContent()[remainingTries - 1])
                 await delayAnimation()
             }
             
