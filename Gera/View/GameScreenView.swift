@@ -302,6 +302,9 @@ struct GameScreenView: View {
                             } else {
                                 if timeRemaining > 0 {
                                     timeRemaining -= 1
+                                    if timeRemaining <= 5{
+                                        NotificationConfiguration.vibrate(type: .warning)
+                                    }
                                     if timeRemaining < 10 {
                                         timeRemainingString = "0\(timeRemaining)"
                                     }else {
@@ -345,24 +348,7 @@ struct GameScreenView: View {
                     Image("barBorder")
                         .offset(y: -85)
                 }
-                Group {
-                    Image(erlen1)
-                        .offset(CGSize(width: offset1.x, height: offset1.y))
-                        .gesture(dragGesture1)
-                    
-                    Image(erlen2)
-                        .offset(CGSize(width: offset2.x, height: offset2.y))
-                        .gesture(dragGesture2)
-                    
-                    Image(erlen3)
-                        .offset(CGSize(width: offset3.x, height: offset3.y))
-                        .gesture(dragGesture3)
-                    Image("miss_Screen")
-                        .offset(y: -5)
-                        .opacity(missed ? 1 : 0)
-                        .animation(.spring(), value: missed)
-                    
-                }
+                
                 Group {
                     Image("Costas_Pote")
                         .offset(y: 42)
@@ -380,6 +366,24 @@ struct GameScreenView: View {
                     Image("Frente_Pote")
                         .offset(y: 10)
                         .opacity(0.8)
+                }
+                Group {
+                    Image(erlen1)
+                        .offset(CGSize(width: offset1.x, height: offset1.y))
+                        .gesture(dragGesture1)
+                    
+                    Image(erlen2)
+                        .offset(CGSize(width: offset2.x, height: offset2.y))
+                        .gesture(dragGesture2)
+                    
+                    Image(erlen3)
+                        .offset(CGSize(width: offset3.x, height: offset3.y))
+                        .gesture(dragGesture3)
+                    Image("miss_Screen")
+                        .offset(y: -5)
+                        .opacity(missed ? 1 : 0)
+                        .animation(.spring(), value: missed)
+                    
                 }
 //                NavigationLink(destination: Congratulations(time: finalTime), isActive: $gameWon) {
 //                    EmptyView()
@@ -423,6 +427,10 @@ struct GameScreenView: View {
                 gameConnectionManager.send(colorName: "lost")
             } else if gameConnectionManager.gameOver {
                 self.gameOver = true
+            }
+            
+            if self.gameOver{
+                NotificationConfiguration.vibrate(type: .error)
             }
             
             try? await Task.sleep(nanoseconds: 1_000_000_000)

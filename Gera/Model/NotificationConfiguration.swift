@@ -7,6 +7,7 @@
 
 import Foundation
 import UserNotifications
+import SwiftUI
 
 struct NotificationConfiguration{
     let title: String
@@ -49,5 +50,11 @@ extension NotificationConfiguration{
         
         UNUserNotificationCenter.current().add(request)
     }
+    
+    static func vibrate(type: UINotificationFeedbackGenerator.FeedbackType){
+            //faz a vibração
+            let generator = UINotificationFeedbackGenerator()
+            generator.notificationOccurred(type)
+        }
     
 }
