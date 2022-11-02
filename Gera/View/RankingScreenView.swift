@@ -8,6 +8,10 @@
 
 import SwiftUI
 
+
+
+
+
 struct RankingScreenView: View{
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     var body: some View{
@@ -18,7 +22,7 @@ struct RankingScreenView: View{
                     VStack(alignment: .center){
                         HStack(){
                             Button(action: {
-                                presentationMode.wrappedValue.dismiss()
+                               presentationMode.wrappedValue.dismiss()
                             }) {
                                 Image("Back_Button")
                             }
@@ -30,45 +34,61 @@ struct RankingScreenView: View{
                             }
                         }
                         .padding(.horizontal)
-//
-                        VStack{
+                        //
+                        VStack(spacing:0){
                             Text("RANKING")
                                 .font(.system(size: 24))
                                 .fontWeight(.medium)
-                            VStack{
+                            
+                            
+                            VStack(spacing: 0){
                                 Image("ranking")
                                 
+                                
+                                
                                 List{
-                                    ForEach(0..<30) {list in
-                                        ZStack{
-                                            
-                                            Image("ranking_rect")
-                                            // .resizable()
-                                                .frame(height: .infinity)
-                                            
+                                    ForEach(0..<RankingData.rankingList.count) {index in
+                                        VStack{
                                             HStack{
-                                                VStack{
-                                                    Text("nome do celular")
-                                                        .font(.system(size: 14))
-                                                        .fontWeight(.light)
-                                                        .multilineTextAlignment(.center)
-                                                    Text("vc terminou em X segundos")
+                                                VStack(alignment: .leading){
+                                                    Text("\(RankingData.rankingList[index].player)")
                                                         .font(.system(size: 14))
                                                         .fontWeight(.light)
                                                         .multilineTextAlignment(.leading)
-                                                }.frame(height: 66)
+                                                    
+                                                    Text("Melhor tempo: \(RankingData.rankingList[index].matchTime) segundos")
+                                                        .font(.system(size: 12))
+                                                        .fontWeight(.light)
+                                                        .multilineTextAlignment(.leading)
+                                                }
+                                                .frame(height: 66)
                                                 Spacer()
-                                                Image("First_Ranking")
+                                                
+                                                Text("\(index+1)°")
+                                                    .font(.system(size: 32))
+                                                    .foregroundColor(Color(hex: "ACACAC"))
+                                                
                                             }
-                                        }.padding(-1)
+                                            
+                                            
+                                            Rectangle()
+                                                .frame(width: 275)
+                                                .frame(height: 4)
+                                                .foregroundColor(Color(hex: "D8D8D8"))
+                                            
+                                        }
+                                        .listRowBackground(Color(hex: "F5F5F5"))
+                                        .listRowSeparator(.hidden)
                                     }
                                 }
-                                .frame(width: .infinity, height: .infinity)
-                                .navigationViewStyle(StackNavigationViewStyle())
+                                .border(Color(hex: "D8D8D8"), width: 4)
+                                .listStyle(.plain)
                                 .scrollIndicators(.hidden)
-                                .frame(width: 306)
+                                .frame(width: 304, height: .infinity)
                                 
-                            }.padding(-1)
+                                
+                            }.padding()
+                            
                         }
                     }
                     .padding(.vertical)
@@ -79,12 +99,38 @@ struct RankingScreenView: View{
                 .edgesIgnoringSafeArea(.vertical)
         }.edgesIgnoringSafeArea(.vertical)
     }
-}
+    
+    func rankMyMatch(playerName: String, gametime: Int){
+        
+        var rankable: (String, Int)
+        rankable.0 = playerName
+        rankable.1 = gametime
+        
+        if RankingData.rankingList.count < 10{
+            RankingData.rankingList.append(rankable)
+            RankingData.rankingList = RankingData.rankingList.sorted(by: {$0.1 < $1.1})
+        }
+        else {
+            if gametime < RankingData.rankingList.last!.matchTime {
+                
+                RankingData.rankingList.removeLast()
+                RankingData.rankingList.append(rankable)
+                RankingData.rankingList = RankingData.rankingList.sorted(by: {$0.1 < $1.1})
+            }
+            else{
+                //simplesmente não reaja
+            }
+        }
+        
 
-
-
-struct RankingScreen_Previews: PreviewProvider {
-    static var previews: some View {
-        RankingScreenView()
+        
     }
+    
+
 }
+    
+    struct RankingScreen_Previews: PreviewProvider {
+        static var previews: some View {
+            RankingScreenView()
+        }
+    }

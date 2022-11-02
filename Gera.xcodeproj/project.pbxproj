@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		476FF12C290861E50045E3DC /* ConnexionScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476FF12B290861E50045E3DC /* ConnexionScreenView.swift */; };
+		6E7E5CE02910B07F0099756A /* RankingDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7E5CDF2910B07F0099756A /* RankingDataManager.swift */; };
 		6EB6DD46290B08A80014C496 /* RankingScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB6DD45290B08A80014C496 /* RankingScreenView.swift */; };
 		6EB6DD48290B16B30014C496 /* HelpScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB6DD47290B16B30014C496 /* HelpScreenView.swift */; };
 		86BCF4A028F66F2100942758 /* GeraApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86BCF49F28F66F2100942758 /* GeraApp.swift */; };
@@ -25,6 +26,7 @@
 
 /* Begin PBXFileReference section */
 		476FF12B290861E50045E3DC /* ConnexionScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnexionScreenView.swift; sourceTree = "<group>"; };
+		6E7E5CDF2910B07F0099756A /* RankingDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankingDataManager.swift; sourceTree = "<group>"; };
 		6EB6DD45290B08A80014C496 /* RankingScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankingScreenView.swift; sourceTree = "<group>"; };
 		6EB6DD47290B16B30014C496 /* HelpScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpScreenView.swift; sourceTree = "<group>"; };
 		8602D0FC290117A200C85A6B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -109,6 +111,7 @@
 				86DAA03829070BB600CD3577 /* ConnectScreenView.swift */,
 				476FF12B290861E50045E3DC /* ConnexionScreenView.swift */,
 				6EB6DD45290B08A80014C496 /* RankingScreenView.swift */,
+				6E7E5CDF2910B07F0099756A /* RankingDataManager.swift */,
 				6EB6DD47290B16B30014C496 /* HelpScreenView.swift */,
 			);
 			path = View;
@@ -204,6 +207,7 @@
 				86BCF4A228F66F2100942758 /* ContentView.swift in Sources */,
 				86DAA03729070BA200CD3577 /* ColorTestView.swift in Sources */,
 				86DAA03529070B9300CD3577 /* StartScreenView.swift in Sources */,
+				6E7E5CE02910B07F0099756A /* RankingDataManager.swift in Sources */,
 				86BCF4A028F66F2100942758 /* GeraApp.swift in Sources */,
 				86DAA03B29070C4F00CD3577 /* stylePlaceholder.swift in Sources */,
 				476FF12C290861E50045E3DC /* ConnexionScreenView.swift in Sources */,

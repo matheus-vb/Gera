@@ -60,9 +60,9 @@ struct HelpScreenView: View{
                         
                         
                         
-                            Text("A cada mistura as cores selecionadas serão indicadas na barrinha acima.")
+                            Text("Atentem-se ao **tempo**, boa sorte cientistas!")
                                 .font(.system(size: 14))
-                                .multilineTextAlignment(.leading)
+                                .multilineTextAlignment(.center)
                                 .frame(width: 250, height: 60)
                             Spacer()
                     }
