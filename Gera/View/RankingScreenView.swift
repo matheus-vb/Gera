@@ -13,6 +13,10 @@ import SwiftUI
 
 
 struct RankingScreenView: View{
+    @State static var rankingData: RankingData = RankingData()
+    
+    
+    
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     var body: some View{
         GeometryReader { geometry in
@@ -22,13 +26,14 @@ struct RankingScreenView: View{
                     VStack(alignment: .center){
                         HStack(){
                             Button(action: {
-                               presentationMode.wrappedValue.dismiss()
+                                
+                                presentationMode.wrappedValue.dismiss()
                             }) {
                                 Image("Back_Button")
                             }
                             Spacer()
                             Button(action: {
-                                print("d")
+                               // print("d")
                             }) {
                                 Image("Sound_Button")
                             }
