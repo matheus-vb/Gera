@@ -17,7 +17,7 @@ struct Congratulations: View {
     var body: some View {
         ZStack {
             
-            NavigationView(){
+            //NavigationView(){
                 ZStack {
                     Rectangle()
                         .edgesIgnoringSafeArea(.all)
@@ -62,10 +62,10 @@ struct Congratulations: View {
                     let sound = Bundle.main.path(forResource: "congratsSound", ofType: "wav")
                     self.audioPlayer = try! AVAudioPlayer(contentsOf: URL(fileURLWithPath: sound!))
                     audioPlayer.play()
-                }
+                }.navigationBarBackButtonHidden(true)
                 
-            }.navigationBarBackButtonHidden(true)
-        }
+            //}.navigationBarBackButtonHidden(true)
+        }.navigationBarBackButtonHidden(true)
     }
     
     func playSound() {

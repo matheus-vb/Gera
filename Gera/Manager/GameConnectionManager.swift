@@ -49,6 +49,32 @@ class GameConnectionManager: NSObject, ObservableObject, MCSessionDelegate, MCAd
         session.delegate = self
     }
     
+    func resetConnection() {
+        
+        if isHost {
+            print("STOP")
+            advertiseAssistant.stopAdvertisingPeer()
+        }
+        
+        connectedToGame = false
+        isTurn = false
+        changed = false
+        
+        isHost = false
+        colorHost = "FFF"
+        colorJoin = "FFF"
+        mixColor = "FFF"
+        
+        hostPlayed = false
+        joinPlayed = false
+        
+        gameOver = false
+        gameWon = false
+        
+        session = MCSession(peer: peerID, securityIdentity: nil, encryptionPreference: .required)
+        color = .red
+    }
+    
     func hostGame() {
         advertiseAssistant = MCNearbyServiceAdvertiser(peer: peerID, discoveryInfo: nil, serviceType: GameConnectionManager.serviceType)
         advertiseAssistant.delegate = self

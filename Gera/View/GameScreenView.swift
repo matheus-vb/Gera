@@ -188,7 +188,7 @@ struct GameScreenView: View {
                     if value.location.y < 110 && value.location.y > -10 && gameConnectionManager.isTurn {
                         gameConnectionManager.send(colorName: playerColors.color3)
                         Task{
-                            await changeAsset(dragGesture: 2)
+                            await changeAsset(dragGesture: 3)
                         }
                         withAnimation(.easeInOut(duration: 0.5)) {
                             self.colorLeft = Color(hex: playerColors.color3)
@@ -299,6 +299,7 @@ struct GameScreenView: View {
                         .onReceive(timer) { _ in
                             if gameWon || gameOver {
                                 self.finalTime = timeRemaining
+                                                            
                             } else {
                                 if timeRemaining > 0 {
                                     timeRemaining -= 1
@@ -311,6 +312,7 @@ struct GameScreenView: View {
                                         timeRemainingString = "\(timeRemaining)"
                                     }
                                 }else if timeRemaining == 0 {
+                                    gameConnectionManager.resetConnection()
                                     self.gameOver = true
                                 }
                             }
@@ -413,10 +415,12 @@ struct GameScreenView: View {
 //                    audioPlayer.numberOfLoops = -1
 //                    audioPlayer.setVolume(volume, fadeDuration: -1)
 //                }
-        }
+        }.navigationBarBackButtonHidden(true)
     }
     
     private func checkGameOver() async {
+        try? await Task.sleep(nanoseconds: 250_000_000)
+        
         while(true) {
             if currColor != gameConnectionManager.mixColor && gameConnectionManager.mixColor != "FFF" {
                 self.remainingTries -= 1
@@ -424,8 +428,10 @@ struct GameScreenView: View {
             }
             if remainingTries == 0 {
                 self.gameOver = true
+                gameConnectionManager.resetConnection()
                 gameConnectionManager.send(colorName: "lost")
             } else if gameConnectionManager.gameOver {
+                gameConnectionManager.resetConnection()
                 self.gameOver = true
             }
             
@@ -433,7 +439,7 @@ struct GameScreenView: View {
                 NotificationConfiguration.vibrate(type: .error)
             }
             
-            try? await Task.sleep(nanoseconds: 1_000_000_000)
+            try? await Task.sleep(nanoseconds: 500_000_000)
         }
     }
     
@@ -442,8 +448,10 @@ struct GameScreenView: View {
             if currColor == gameConnectionManager.mixColor {
                 print("-----DONE-----")
                 self.gameWon = true
+                gameConnectionManager.resetConnection()
                 gameConnectionManager.send(colorName: "won")
             } else if gameConnectionManager.gameWon {
+                gameConnectionManager.resetConnection()
                 self.gameWon = true
             }
             

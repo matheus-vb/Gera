@@ -61,7 +61,7 @@ struct GameOver : View {
                 let sound = Bundle.main.path(forResource: "gameOverSound", ofType: "wav")
                 self.audioPlayer = try! AVAudioPlayer(contentsOf: URL(fileURLWithPath: sound!))
                 audioPlayer.play()
-            }
+            }.navigationBarBackButtonHidden(true)
             
 //        }.navigationBarBackButtonHidden(true)
     }
