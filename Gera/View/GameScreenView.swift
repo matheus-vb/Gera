@@ -287,14 +287,14 @@ struct GameScreenView: View {
                         .offset(y: -180)
                 }
                 Group {
-                    Button(action: {
-                        isHiddenPopup = true
-                        //config view
-//                        gameWon.toggle()
-                        
-                    }) {
-                        Image("Config_Button")
-                    }.offset(x: 130, y: -320)
+//                    Button(action: {
+//                        isHiddenPopup = true
+//                        //config view
+////                        gameWon.toggle()
+//
+//                    }) {
+//                        Image("Config_Button")
+//                    }.offset(x: 130, y: -320)
                     Image("Relogio")
                         .offset(x: 0, y: -336)
                     Text("00:\(timeRemainingString)")
@@ -404,15 +404,15 @@ struct GameScreenView: View {
 //                }
                 
                 Group {
-                    Settings(isHiddenPopup: $isHiddenPopup, changeVolume: $changeVolume)
+                    SettingsView(isHiddenPopup: $isHiddenPopup, changeVolume: $changeVolume)
                 } .isHidden(!isHiddenPopup, remove: !isHiddenPopup)
                 
                 Group {
-                    Congratulations(time: finalTime)
+                    CongratulationsView(time: finalTime)
                 } .isHidden(!gameWon, remove: !gameWon)
                 
                 Group {
-                    GameOver(time: finalTime)
+                    GameOverView(time: finalTime)
                 } .isHidden(!gameOver, remove: !gameOver)
                 
                 NavigationLink(destination: StartScreenView(), isActive: $didQuit) {

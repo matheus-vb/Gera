@@ -37,7 +37,7 @@ struct StartScreenView: View {
                     Image("bubble1")
                     Image("bubble2")
                     Image("Title")
-                        .offset(y: -182)
+                        .offset(y: -222)
                 }
                 Group {
                     Image("bac1")
@@ -133,19 +133,19 @@ struct StartScreenView: View {
                     NavigationLink(destination: ConnexionScreenView(), label: {Image("buttonJogar")})
                         .offset(y:260)
                     
-                    Button(action: {
-                        print("d")
-                    }) {
-                        Image("buttonHelp")
-                    }
-                    .offset(x: -130,y: -300)
-                    
-                    Button(action: {
-                        print("d")
-                    }) {
-                        Image("buttonSound")
-                    }
-                    .offset(x: 130,y: -300)
+//                    Button(action: {
+//                        print("d")
+//                    }) {
+//                        Image("buttonHelp")
+//                    }
+//                    .offset(x: -130,y: -300)
+//
+//                    Button(action: {
+//                        print("d")
+//                    }) {
+//                        Image("buttonSound")
+//                    }
+//                    .offset(x: 130,y: -300)
                     
                 }
             }.onAppear {

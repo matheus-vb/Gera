@@ -8,7 +8,7 @@
 import SwiftUI
 import AVFoundation
 
-struct Settings : View {
+struct SettingsView : View {
     @State var click : Bool = false
     @State var music : Bool = false
     @State var notification : Bool = false

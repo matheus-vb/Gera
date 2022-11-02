@@ -8,7 +8,7 @@
 import SwiftUI
 import AVFoundation
 
-struct Congratulations: View {
+struct CongratulationsView: View {
     @State var audioPlayer: AVAudioPlayer!
     @State var audioPlayer2: AVAudioPlayer!
     
@@ -44,19 +44,19 @@ struct Congratulations: View {
                         self.audioPlayer2 = try! AVAudioPlayer(contentsOf: URL(fileURLWithPath: sound!))
                         audioPlayer2.play()
                     })
-                    .offset(x: -80, y: 124)
+                    .offset(x: 0, y: 124)
                     
                     
-                    Button(action: {
-                        let sound = Bundle.main.path(forResource: "clickSound", ofType: "wav")
-                        self.audioPlayer2 = try! AVAudioPlayer(contentsOf: URL(fileURLWithPath: sound!))
-                        audioPlayer2.play()
-                        
-                        // colocar uma navigation link
-                    }) {
-                        Image("buttonReload")
-                        
-                    }.offset(x: 80, y: 124)
+//                    Button(action: {
+//                        let sound = Bundle.main.path(forResource: "clickSound", ofType: "wav")
+//                        self.audioPlayer2 = try! AVAudioPlayer(contentsOf: URL(fileURLWithPath: sound!))
+//                        audioPlayer2.play()
+//
+//                        // colocar uma navigation link
+//                    }) {
+//                        Image("buttonReload")
+//
+//                    }.offset(x: 80, y: 124)
                     
                     
                 }.onAppear {
@@ -79,6 +79,6 @@ struct Congratulations: View {
 
 struct Congratulations_Previews: PreviewProvider {
     static var previews: some View {
-        Congratulations(time: 20)
+        CongratulationsView(time: 20)
     }
 }

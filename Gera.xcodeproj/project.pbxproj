@@ -23,19 +23,16 @@
 		86AB8B1529117CE60012F35B /* BacteriaShapeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86AB8B1429117CE60012F35B /* BacteriaShapeView.swift */; };
 		86AB8B172911B9A30012F35B /* NotificationConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86AB8B162911B9A30012F35B /* NotificationConfiguration.swift */; };
 		86AB8B1B2911BC4D0012F35B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86AB8B1A2911BC4D0012F35B /* AppDelegate.swift */; };
-		86BC6C3F2910052400339778 /* PopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86BC6C3C2910052400339778 /* PopupView.swift */; };
-		86BC6C402910052400339778 /* PopupSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86BC6C3D2910052400339778 /* PopupSettingsView.swift */; };
-		86BC6C412910052400339778 /* PopupGameOver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86BC6C3E2910052400339778 /* PopupGameOver.swift */; };
+		86AB8B1F2913169A0012F35B /* UIBezierPath+bacmodelSVG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86AB8B1E2913169A0012F35B /* UIBezierPath+bacmodelSVG.swift */; };
+		86BC6C3F2910052400339778 /* CongratulationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86BC6C3C2910052400339778 /* CongratulationsView.swift */; };
+		86BC6C402910052400339778 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86BC6C3D2910052400339778 /* SettingsView.swift */; };
+		86BC6C412910052400339778 /* GameOverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86BC6C3E2910052400339778 /* GameOverView.swift */; };
 		86BCF4A028F66F2100942758 /* GeraApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86BCF49F28F66F2100942758 /* GeraApp.swift */; };
 		86BCF4A228F66F2100942758 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86BCF4A128F66F2100942758 /* ContentView.swift */; };
 		86BCF4A428F66F2300942758 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 86BCF4A328F66F2300942758 /* Assets.xcassets */; };
 		86BCF4A728F66F2300942758 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 86BCF4A628F66F2300942758 /* Preview Assets.xcassets */; };
 		86BCF4CE28FF23E100942758 /* GameConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86BCF4CD28FF23E100942758 /* GameConnectionManager.swift */; };
 		86DAA03529070B9300CD3577 /* StartScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86DAA03429070B9300CD3577 /* StartScreenView.swift */; };
-		86DAA03729070BA200CD3577 /* ColorTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86DAA03629070BA200CD3577 /* ColorTestView.swift */; };
-		86DAA03929070BB600CD3577 /* ConnectScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86DAA03829070BB600CD3577 /* ConnectScreenView.swift */; };
-		86DAA03B29070C4F00CD3577 /* stylePlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86DAA03A29070C4F00CD3577 /* stylePlaceholder.swift */; };
-		86DAA03F29070C7B00CD3577 /* modelPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86DAA03E29070C7B00CD3577 /* modelPlaceholder.swift */; };
 		86DAA0412907246700CD3577 /* Color+hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86DAA0402907246700CD3577 /* Color+hex.swift */; };
 		86DAA04329086B8200CD3577 /* GameScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86DAA04229086B8200CD3577 /* GameScreenView.swift */; };
 /* End PBXBuildFile section */
@@ -58,9 +55,10 @@
 		86AB8B1429117CE60012F35B /* BacteriaShapeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BacteriaShapeView.swift; sourceTree = "<group>"; };
 		86AB8B162911B9A30012F35B /* NotificationConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationConfiguration.swift; sourceTree = "<group>"; };
 		86AB8B1A2911BC4D0012F35B /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		86BC6C3C2910052400339778 /* PopupView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PopupView.swift; path = Gera/View/PopupView.swift; sourceTree = SOURCE_ROOT; };
-		86BC6C3D2910052400339778 /* PopupSettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PopupSettingsView.swift; path = Gera/View/PopupSettingsView.swift; sourceTree = SOURCE_ROOT; };
-		86BC6C3E2910052400339778 /* PopupGameOver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PopupGameOver.swift; path = Gera/View/PopupGameOver.swift; sourceTree = SOURCE_ROOT; };
+		86AB8B1E2913169A0012F35B /* UIBezierPath+bacmodelSVG.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIBezierPath+bacmodelSVG.swift"; sourceTree = "<group>"; };
+		86BC6C3C2910052400339778 /* CongratulationsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CongratulationsView.swift; path = Gera/View/CongratulationsView.swift; sourceTree = SOURCE_ROOT; };
+		86BC6C3D2910052400339778 /* SettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsView.swift; path = Gera/View/SettingsView.swift; sourceTree = SOURCE_ROOT; };
+		86BC6C3E2910052400339778 /* GameOverView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GameOverView.swift; path = Gera/View/GameOverView.swift; sourceTree = SOURCE_ROOT; };
 		86BCF49C28F66F2100942758 /* Gera.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Gera.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		86BCF49F28F66F2100942758 /* GeraApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeraApp.swift; sourceTree = "<group>"; };
 		86BCF4A128F66F2100942758 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -68,10 +66,6 @@
 		86BCF4A628F66F2300942758 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		86BCF4CD28FF23E100942758 /* GameConnectionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameConnectionManager.swift; sourceTree = "<group>"; };
 		86DAA03429070B9300CD3577 /* StartScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartScreenView.swift; sourceTree = "<group>"; };
-		86DAA03629070BA200CD3577 /* ColorTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorTestView.swift; sourceTree = "<group>"; };
-		86DAA03829070BB600CD3577 /* ConnectScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectScreenView.swift; sourceTree = "<group>"; };
-		86DAA03A29070C4F00CD3577 /* stylePlaceholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = stylePlaceholder.swift; sourceTree = "<group>"; };
-		86DAA03E29070C7B00CD3577 /* modelPlaceholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = modelPlaceholder.swift; sourceTree = "<group>"; };
 		86DAA0402907246700CD3577 /* Color+hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+hex.swift"; sourceTree = "<group>"; };
 		86DAA04229086B8200CD3577 /* GameScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScreenView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -147,9 +141,9 @@
 		86DAA03029070A0100CD3577 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				86DAA03E29070C7B00CD3577 /* modelPlaceholder.swift */,
 				869F96BE290B0C850026B9D3 /* PlayerColors.swift */,
 				86AB8B162911B9A30012F35B /* NotificationConfiguration.swift */,
+				86AB8B1E2913169A0012F35B /* UIBezierPath+bacmodelSVG.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -157,14 +151,12 @@
 		86DAA03129070A0700CD3577 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				86BC6C3E2910052400339778 /* PopupGameOver.swift */,
-				86BC6C3D2910052400339778 /* PopupSettingsView.swift */,
-				86BC6C3C2910052400339778 /* PopupView.swift */,
+				86BC6C3E2910052400339778 /* GameOverView.swift */,
+				86BC6C3D2910052400339778 /* SettingsView.swift */,
+				86BC6C3C2910052400339778 /* CongratulationsView.swift */,
 				86DAA03429070B9300CD3577 /* StartScreenView.swift */,
 				86DAA04229086B8200CD3577 /* GameScreenView.swift */,
 				86AB8B1429117CE60012F35B /* BacteriaShapeView.swift */,
-				86DAA03629070BA200CD3577 /* ColorTestView.swift */,
-				86DAA03829070BB600CD3577 /* ConnectScreenView.swift */,
 				476FF12B290861E50045E3DC /* ConnexionScreenView.swift */,
 				86AB8B1229117A470012F35B /* ShapeView.swift */,
 			);
@@ -182,7 +174,6 @@
 		86DAA03329070A1500CD3577 /* Style */ = {
 			isa = PBXGroup;
 			children = (
-				86DAA03A29070C4F00CD3577 /* stylePlaceholder.swift */,
 				86DAA0402907246700CD3577 /* Color+hex.swift */,
 				86AB8B1029116F550012F35B /* UIBezierPath+SVG.swift */,
 				869F96BC290B0B5E0026B9D3 /* ColorCodes.swift */,
@@ -271,24 +262,21 @@
 				86BCF4A228F66F2100942758 /* ContentView.swift in Sources */,
 				869F96BF290B0C850026B9D3 /* PlayerColors.swift in Sources */,
 				86AB8B1129116F550012F35B /* UIBezierPath+SVG.swift in Sources */,
-				86DAA03729070BA200CD3577 /* ColorTestView.swift in Sources */,
 				86DAA03529070B9300CD3577 /* StartScreenView.swift in Sources */,
 				86BCF4A028F66F2100942758 /* GeraApp.swift in Sources */,
 				869F96BD290B0B5E0026B9D3 /* ColorCodes.swift in Sources */,
-				86BC6C402910052400339778 /* PopupSettingsView.swift in Sources */,
+				86BC6C402910052400339778 /* SettingsView.swift in Sources */,
 				86DAA04329086B8200CD3577 /* GameScreenView.swift in Sources */,
 				86AB8B1529117CE60012F35B /* BacteriaShapeView.swift in Sources */,
-				86BC6C412910052400339778 /* PopupGameOver.swift in Sources */,
-				86BC6C3F2910052400339778 /* PopupView.swift in Sources */,
-				86DAA03B29070C4F00CD3577 /* stylePlaceholder.swift in Sources */,
+				86BC6C412910052400339778 /* GameOverView.swift in Sources */,
+				86BC6C3F2910052400339778 /* CongratulationsView.swift in Sources */,
+				86AB8B1F2913169A0012F35B /* UIBezierPath+bacmodelSVG.swift in Sources */,
 				86AB8B172911B9A30012F35B /* NotificationConfiguration.swift in Sources */,
 				86AB8B1329117A470012F35B /* ShapeView.swift in Sources */,
 				476FF12C290861E50045E3DC /* ConnexionScreenView.swift in Sources */,
-				86DAA03F29070C7B00CD3577 /* modelPlaceholder.swift in Sources */,
 				86DAA0412907246700CD3577 /* Color+hex.swift in Sources */,
 				86AB8B1B2911BC4D0012F35B /* AppDelegate.swift in Sources */,
 				86BCF4CE28FF23E100942758 /* GameConnectionManager.swift in Sources */,
-				86DAA03929070BB600CD3577 /* ConnectScreenView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

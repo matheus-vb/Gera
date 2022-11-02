@@ -8,16 +8,13 @@
 import SwiftUI
 import AVFoundation
 
-struct GameOver : View {
+struct GameOverView : View {
     @State var audioPlayer: AVAudioPlayer!
     @State var audioPlayer2: AVAudioPlayer!
     
     var time: Int
     
     var body: some View {
-        
-//        NavigationView(){
-            
             ZStack {
                 Rectangle()
                     .edgesIgnoringSafeArea(.all)
@@ -47,17 +44,17 @@ struct GameOver : View {
                     self.audioPlayer2 = try! AVAudioPlayer(contentsOf: URL(fileURLWithPath: sound!))
                     audioPlayer2.play()
                 })
-                .offset(x: -80, y: 100)
+                .offset(x: 0, y: 100)
                 
-                Button(action: {
-                    let sound = Bundle.main.path(forResource: "clickSound", ofType: "wav")
-                    self.audioPlayer2 = try! AVAudioPlayer(contentsOf: URL(fileURLWithPath: sound!))
-                    audioPlayer2.play()
-                    // colocar uma navigation link
-                }) {
-                    Image("buttonReload")
-                    
-                }.offset(x: 80, y: 100)
+//                Button(action: {
+//                    let sound = Bundle.main.path(forResource: "clickSound", ofType: "wav")
+//                    self.audioPlayer2 = try! AVAudioPlayer(contentsOf: URL(fileURLWithPath: sound!))
+//                    audioPlayer2.play()
+//                    // colocar uma navigation link
+//                }) {
+//                    Image("buttonReload")
+//
+//                }.offset(x: 80, y: 100)
                 
             }.onAppear {
                 let sound = Bundle.main.path(forResource: "gameOverSound", ofType: "wav")
@@ -71,7 +68,7 @@ struct GameOver : View {
 
 struct GameOver_Previews: PreviewProvider {
     static var previews: some View {
-        GameOver(time: 10)
+        GameOverView(time: 10)
     }
 }
 
