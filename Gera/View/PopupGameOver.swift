@@ -11,17 +11,17 @@ import AVFoundation
 struct GameOver : View {
     @State var audioPlayer: AVAudioPlayer!
     @State var audioPlayer2: AVAudioPlayer!
-    var time: String = "01:01"
+    
+    var time: Int
     
     var body: some View {
         
         NavigationView(){
             
             ZStack {
-                Image("Partida6")
                 Rectangle()
                     .edgesIgnoringSafeArea(.all)
-                    .opacity(0.5)
+                    .opacity(0.9)
                 
                 Image("gameOver")
                     .offset(y:-50)
@@ -33,7 +33,7 @@ struct GameOver : View {
                     .fontWeight(.semibold)
                     .frame(width: 210)
                 
-                Text(time)
+                Text("\(30 - time)seg")
                     .offset(y: 5)
                     .font(.largeTitle)
                     .fontWeight(.semibold)
@@ -69,7 +69,7 @@ struct GameOver : View {
 
 struct GameOver_Previews: PreviewProvider {
     static var previews: some View {
-        GameOver()
+        GameOver(time: 10)
     }
 }
 
