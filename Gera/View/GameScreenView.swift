@@ -294,9 +294,9 @@ struct GameScreenView: View {
                         
                     }) {
                         Image("Config_Button")
-                    }.offset(x: 130, y: -300)
+                    }.offset(x: 130, y: -320)
                     Image("Relogio")
-                        .offset(x: 0, y: -316)
+                        .offset(x: 0, y: -336)
                     Text("00:\(timeRemainingString)")
                         .foregroundColor(.black)
                         .onReceive(timer) { _ in
@@ -322,7 +322,7 @@ struct GameScreenView: View {
                                 }
                             }
                         }
-                        .offset(y: -300)
+                        .offset(y: -320)
                         .font(.system(size: 24))
                         .fontWeight(.medium)
                     
@@ -333,7 +333,7 @@ struct GameScreenView: View {
                     }){
                         Image("buttonExit")
                     }
-                    .offset(x:-130, y: -300)
+                    .offset(x:-130, y: -320)
                 }
                 
                 Group {
@@ -358,16 +358,16 @@ struct GameScreenView: View {
                     Image("Costas_Pote")
                         .offset(y: 42)
                     BacteriaShapeView(color: currColor)
-                        .frame(width: 60)
+                        .frame(width: 72)
                         .scaleEffect(1)
-                        .offset(x: -2, y: 410)
+                        .offset(x: -2, y: 394)
                         .animation(.easeIn, value: currColor)
                         .task(delayBacteria)
                     Image("bacShadow")
                         .resizable()
                         .aspectRatio(contentMode: .fit)
-                        .offset(x: -1,y: 20)
-                        .frame(width: 63)
+                        .offset(x: -1,y: 9)
+                        .frame(width: 78)
                     Image(glassLabel)
                         .offset(y: 10)
                         .opacity(0.8)
