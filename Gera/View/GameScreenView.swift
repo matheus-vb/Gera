@@ -251,8 +251,14 @@ struct GameScreenView: View {
                         .offset(x: 0, y: -316)
                     Text("00:\(timeRemainingString)")
                         .onReceive(timer) { _ in
+                            
+                            
+                            
                             if timeRemaining > 0 {
                                 timeRemaining -= 1
+                                if timeRemaining <= 5{
+                                    vibrate(type: .warning)
+                                }
                                 if timeRemaining < 10 {
                                     timeRemainingString = "0\(timeRemaining)"
                                 }else {
@@ -318,6 +324,12 @@ struct GameScreenView: View {
                 }
             }.navigationBarBackButtonHidden(true)
         }
+    }
+    
+    private func vibrate(type: UINotificationFeedbackGenerator.FeedbackType){
+        //faz a vibração
+        let generator = UINotificationFeedbackGenerator()
+        generator.notificationOccurred(type)
     }
     
     private func checkResult() async {
