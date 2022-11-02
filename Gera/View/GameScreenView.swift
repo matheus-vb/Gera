@@ -31,10 +31,23 @@ struct GameScreenView: View {
     let asset9: String
     let asset10: String
     
+    let asset_empty: String = "p1_empty"
+    
     let pathBounds = UIBezierPath.calculateBounds(paths: [.bac1path1, .bac1path2, .bac1path3, .bac1path4, .bac1path5, .bac1path6, .bac1path7, .bac1path8, .bac1path9, .bac1path10, .bac1path11, .bac1path12, .bac1path13, .bac1path14, .bac1path15, .bac1path16, .bac1path17, .bac1path18, .bac1path19, .bac1path20, .bac1path21, .bac1path22, .bac1path23, .bac1path24, .bac1path25, .bac1path26, .bac1path27, .bac1path28, .bac1path29, .bac1path30, .bac1path31, .bac1path32, .bac1path33, .bac1path34, .bac1path35, .bac1path36, .bac1path37, .bac1path38, .bac1path39, .bac1path40, .bac1path41, .bac1path42, .bac1path43, .bac1path44, .bac1path45])
     
     @State var gameStarted: Bool = false
     @State var playerTwoPlayed: Bool = false
+    
+    @State var erlen1: String
+    @State var erlen2: String
+    @State var erlen3: String
+    @State var erlen4: String
+    @State var erlen5: String
+    @State var erlen6: String
+    @State var erlen7: String
+    @State var erlen8: String
+    @State var erlen9: String
+    @State var erlen10: String
     
     @State var missed: Bool = false
     @State var missOpacity: Double = 0
@@ -89,9 +102,13 @@ struct GameScreenView: View {
                     
                     if value.location.y < 110 && value.location.y > -10 && gameConnectionManager.isTurn {
                         gameConnectionManager.send(colorName: playerColors.color1)
+                        Task{
+                            await changeAsset(dragGesture: 1)
+                        }
                         withAnimation(.easeInOut(duration: 0.5)) {
                             self.colorLeft = Color(hex: playerColors.color1)
                             self.playerOneColor = playerColors.color1
+                            
                         }
                         withAnimation(.easeInOut(duration: 1)) {
                             self.offset1 = location1
@@ -128,6 +145,9 @@ struct GameScreenView: View {
                     
                     if value.location.y < 110 && value.location.y > -10 && gameConnectionManager.isTurn {
                         gameConnectionManager.send(colorName: playerColors.color2)
+                        Task{
+                            await changeAsset(dragGesture: 2)
+                        }
                         withAnimation(.easeInOut(duration: 0.5)) {
                             self.colorLeft = Color(hex: playerColors.color2)
                             self.playerOneColor = playerColors.color2
@@ -167,6 +187,9 @@ struct GameScreenView: View {
                     
                     if value.location.y < 110 && value.location.y > -10 && gameConnectionManager.isTurn {
                         gameConnectionManager.send(colorName: playerColors.color3)
+                        Task{
+                            await changeAsset(dragGesture: 2)
+                        }
                         withAnimation(.easeInOut(duration: 0.5)) {
                             self.colorLeft = Color(hex: playerColors.color3)
                             self.playerOneColor = playerColors.color3
@@ -233,6 +256,18 @@ struct GameScreenView: View {
             asset9 = "p1_brown"
             asset10 = "p1_cyan"
         }
+        
+        erlen1 = asset1
+        erlen2 = asset2
+        erlen3 = asset3
+        erlen4 = asset4
+        erlen5 = asset5
+        erlen6 = asset6
+        erlen7 = asset7
+        erlen8 = asset8
+        erlen9 = asset9
+        erlen10 = asset10
+        
     }
     
     //MARK: - VIEW BODY
@@ -293,11 +328,11 @@ struct GameScreenView: View {
                     .offset(x:-130, y: -300)
                 }
                 Group {
-                    Image(asset8)
+                    Image(erlen8)
                         .offset(x: 120, y: -210)
-                    Image(asset7)
+                    Image(erlen7)
                         .offset(x: 0, y: -210)
-                    Image(asset6)
+                    Image(erlen6)
                         .offset(x: -120, y: -210)
                 }
                 Group {
@@ -311,15 +346,15 @@ struct GameScreenView: View {
                         .offset(y: -85)
                 }
                 Group {
-                    Image(asset1)
+                    Image(erlen1)
                         .offset(CGSize(width: offset1.x, height: offset1.y))
                         .gesture(dragGesture1)
                     
-                    Image(asset2)
+                    Image(erlen2)
                         .offset(CGSize(width: offset2.x, height: offset2.y))
                         .gesture(dragGesture2)
                     
-                    Image(asset3)
+                    Image(erlen3)
                         .offset(CGSize(width: offset3.x, height: offset3.y))
                         .gesture(dragGesture3)
                     Image("miss_Screen")
@@ -405,6 +440,30 @@ struct GameScreenView: View {
             }
             
             try? await Task.sleep(nanoseconds: 200_000_000)
+        }
+    }
+    
+    private func changeAsset(dragGesture: Int) async {
+        if dragGesture == 1{
+            erlen1 = asset_empty
+        }else if dragGesture == 2{
+            erlen2 = asset_empty
+        }else if dragGesture == 3{
+            erlen3 = asset_empty
+        }else{
+            print("function changeAsset not working")
+        }
+        
+        try? await Task.sleep(nanoseconds: 1_000_000_000)
+        
+        if dragGesture == 1{
+            erlen1 = asset1
+        }else if dragGesture == 2{
+            erlen2 = asset2
+        }else if dragGesture == 3{
+            erlen3 = asset3
+        }else{
+            print("function changeAsset not working")
         }
     }
     
