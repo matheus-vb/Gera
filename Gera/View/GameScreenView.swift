@@ -435,10 +435,6 @@ struct GameScreenView: View {
                 self.gameOver = true
             }
             
-            if self.gameOver{
-                NotificationConfiguration.vibrate(type: .error)
-            }
-            
             try? await Task.sleep(nanoseconds: 500_000_000)
         }
     }
@@ -485,6 +481,7 @@ struct GameScreenView: View {
     
     private func delayAnimation() async {
         self.missed = true
+        NotificationConfiguration.vibrate(type: .warning)
         try? await Task.sleep(nanoseconds: 1_000_000_000)
         self.missed = false
     }
