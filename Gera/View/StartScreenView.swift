@@ -153,6 +153,7 @@ struct StartScreenView: View {
                 self.audioPlayer = try! AVAudioPlayer(contentsOf: URL(fileURLWithPath: sound!))
                 audioPlayer.play()
                 audioPlayer.numberOfLoops = -1
+                NotificationConfiguration.askForPermission()
             }
         }.navigationBarBackButtonHidden(true)
     }
