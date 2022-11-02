@@ -53,7 +53,10 @@ class GameConnectionManager: NSObject, ObservableObject, MCSessionDelegate, MCAd
         
         if isHost {
             print("STOP")
+            session.disconnect()
             advertiseAssistant.stopAdvertisingPeer()
+        } else {
+            session.disconnect()
         }
         
         connectedToGame = false

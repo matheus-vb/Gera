@@ -31,11 +31,13 @@ struct GameOver : View {
                     .offset(y:-70)
                     .font(.system(size: 24))
                     .fontWeight(.semibold)
+                    .foregroundColor(.black)
                     .frame(width: 210)
                 
                 Text("\(30 - time)seg")
                     .offset(y: 5)
                     .font(.largeTitle)
+                    .foregroundColor(.black)
                     .fontWeight(.semibold)
                 
                 NavigationLink (destination: StartScreenView(), label: {

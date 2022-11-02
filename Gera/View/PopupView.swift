@@ -35,6 +35,7 @@ struct Congratulations: View {
                         .offset(y: 20)
                         .font(.largeTitle)
                         .fontWeight(.semibold)
+                        .foregroundColor(.black)
                     
                     NavigationLink (destination: StartScreenView(), label: {
                         Image("buttonHome")

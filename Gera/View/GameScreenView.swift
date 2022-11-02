@@ -57,9 +57,11 @@ struct GameScreenView: View {
     @State var mixColor = "FFF"
     
     @State var remainingTries = 5
+    @State var glassLabel = "Frente_Pote"
     
     @State var gameOver: Bool = false
     @State var gameWon: Bool = false
+    @State var didQuit: Bool = false
     
     let location1: CGPoint = CGPoint(x: -120, y: 245)
     let location2: CGPoint = CGPoint(x: 0, y: 245)
@@ -296,6 +298,7 @@ struct GameScreenView: View {
                     Image("Relogio")
                         .offset(x: 0, y: -316)
                     Text("00:\(timeRemainingString)")
+                        .foregroundColor(.black)
                         .onReceive(timer) { _ in
                             if gameWon || gameOver {
                                 self.finalTime = timeRemaining
@@ -312,7 +315,9 @@ struct GameScreenView: View {
                                         timeRemainingString = "\(timeRemaining)"
                                     }
                                 }else if timeRemaining == 0 {
-                                    gameConnectionManager.resetConnection()
+                                    Task {
+                                        await delayReset()
+                                    }
                                     self.gameOver = true
                                 }
                             }
@@ -322,16 +327,15 @@ struct GameScreenView: View {
                         .fontWeight(.medium)
                     
                     Button(action: {
-                        missed.toggle()
-                        gameOver.toggle()
                         Task {
-                            await delayAnimation()
+                            await delayStartScreen()
                         }
                     }){
                         Image("buttonExit")
                     }
                     .offset(x:-130, y: -300)
                 }
+                
                 Group {
                     Image(erlen8)
                         .offset(x: 120, y: -210)
@@ -339,8 +343,7 @@ struct GameScreenView: View {
                         .offset(x: 0, y: -210)
                     Image(erlen6)
                         .offset(x: -120, y: -210)
-                }
-                Group {
+                    
                     RoundedRectangle(cornerRadius: 15)
                         .frame(width: 208, height: 16)
                         .foregroundColor(Color(hex: gameConnectionManager.mixColor))
@@ -365,9 +368,14 @@ struct GameScreenView: View {
                         .aspectRatio(contentMode: .fit)
                         .offset(x: -1,y: 20)
                         .frame(width: 63)
-                    Image("Frente_Pote")
+                    Image(glassLabel)
                         .offset(y: 10)
                         .opacity(0.8)
+                    Text("Tentativas restantes: \(remainingTries)")
+                        .foregroundColor(.white)
+                        .font(.system(size: 18))
+                        .fontWeight(.medium)
+                        .offset(y: 102)
                 }
                 Group {
                     Image(erlen1)
@@ -406,6 +414,9 @@ struct GameScreenView: View {
                     GameOver(time: finalTime)
                 } .isHidden(!gameOver, remove: !gameOver)
                 
+                NavigationLink(destination: StartScreenView(), isActive: $didQuit) {
+                    EmptyView()
+                }
                     
             }.navigationBarBackButtonHidden(true)
 //                .onAppear {
@@ -426,12 +437,20 @@ struct GameScreenView: View {
                 self.remainingTries -= 1
                 await delayAnimation()
             }
+            
+            if remainingTries < 3 {
+                self.glassLabel = "Frente_Rachado"
+            }
+            
             if remainingTries == 0 {
-                self.gameOver = true
                 gameConnectionManager.resetConnection()
+                try? await Task.sleep(nanoseconds: 100_000_000)
+                self.gameOver = true
                 gameConnectionManager.send(colorName: "lost")
+                
             } else if gameConnectionManager.gameOver {
                 gameConnectionManager.resetConnection()
+                try? await Task.sleep(nanoseconds: 100_000_000)
                 self.gameOver = true
             }
             
@@ -443,11 +462,13 @@ struct GameScreenView: View {
         while(true) {
             if currColor == gameConnectionManager.mixColor {
                 print("-----DONE-----")
-                self.gameWon = true
                 gameConnectionManager.resetConnection()
+                try? await Task.sleep(nanoseconds: 100_000_000)
+                self.gameWon = true
                 gameConnectionManager.send(colorName: "won")
             } else if gameConnectionManager.gameWon {
                 gameConnectionManager.resetConnection()
+                try? await Task.sleep(nanoseconds: 100_000_000)
                 self.gameWon = true
             }
             
@@ -477,6 +498,17 @@ struct GameScreenView: View {
         }else{
             print("function changeAsset not working")
         }
+    }
+    
+    private func delayReset() async {
+        gameConnectionManager.resetConnection()
+        try? await Task.sleep(nanoseconds: 100_000_000)
+    }
+    
+    private func delayStartScreen() async {
+        gameConnectionManager.resetConnection()
+        try? await Task.sleep(nanoseconds: 100_000_000)
+        self.didQuit = true
     }
     
     private func delayAnimation() async {

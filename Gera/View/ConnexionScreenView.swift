@@ -58,6 +58,7 @@ struct ConnexionScreenView: View{
                         Group{
                             Spacer()
                             Text("ESCOLHA SEU CIENTISTA PARCEIRO").font(.system(size: 24)).fontWeight(.medium).multilineTextAlignment(.center)
+                                .foregroundColor(.black)
                             Spacer()
                             Group{
                                 Button(action: {
@@ -137,7 +138,13 @@ struct LoadingView: View{
     }
     
     var body: some View{
-        Text(titulo).font(.system(size: 24)).fontWeight(.medium).multilineTextAlignment(.center).lineLimit(2).padding(.top)
+        Text(titulo)
+            .font(.system(size: 24))
+            .fontWeight(.medium)
+            .multilineTextAlignment(.center)
+            .lineLimit(2)
+            .foregroundColor(.black)
+            .padding(.top)
         Spacer()
         Image(image)
         Spacer()
@@ -148,6 +155,7 @@ struct LoadingView: View{
         }.frame(width: 324, height: 30, alignment: .center)
         Spacer()
         Text(aguardando[count])
+            .foregroundColor(.black)
             .onAppear{
                 count = 0
             }

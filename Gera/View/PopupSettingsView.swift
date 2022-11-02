@@ -34,6 +34,7 @@ struct Settings : View {
                     .offset(y:-150)
                     .font(.system(size: 24))
                     .fontWeight(.semibold)
+                    .foregroundColor(.black)
                     .frame(width: 171)
                 
                 Button (action: {
