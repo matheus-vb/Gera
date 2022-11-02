@@ -21,7 +21,7 @@ struct Congratulations: View {
                 ZStack {
                     Rectangle()
                         .edgesIgnoringSafeArea(.all)
-                        .opacity(0.9)
+                        .opacity(0.5)
                     
                     Image("congrats")
                         .offset(y:-50)

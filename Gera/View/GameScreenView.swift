@@ -7,6 +7,9 @@
 
 import Foundation
 import SwiftUI
+import AVFoundation
+
+var volume: Float = 1
 
 struct GameScreenView: View {
     
@@ -62,6 +65,12 @@ struct GameScreenView: View {
     @State var colorRight: Color = Color(hex: "FFF")
     
     @GestureState var startLocation: CGPoint? = nil
+    
+    @State var audioPlayer: AVAudioPlayer!
+    
+    @State var isHiddenPopup = false
+    
+    @State var changeVolume = false
     
     //MARK: - Purple drag
     var dragGesture1: some Gesture {
@@ -242,8 +251,9 @@ struct GameScreenView: View {
                 }
                 Group {
                     Button(action: {
+                        isHiddenPopup = true
                         //config view
-                        gameWon.toggle()
+//                        gameWon.toggle()
                         
                     }) {
                         Image("Config_Button")
@@ -263,7 +273,7 @@ struct GameScreenView: View {
                                         timeRemainingString = "\(timeRemaining)"
                                     }
                                 }else if timeRemaining == 0 {
-                                    //self.gameOver = true
+                                    self.gameOver = true
                                 }
                             }
                         }
@@ -336,16 +346,34 @@ struct GameScreenView: View {
                         .offset(y: 10)
                         .opacity(0.8)
                 }
-                NavigationLink(destination: Congratulations(time: finalTime), isActive: $gameWon) {
-                    EmptyView()
-                }
-                NavigationLink(destination: GameOver(time: finalTime), isActive: $gameOver) {
-                    EmptyView()
-                }
+//                NavigationLink(destination: Congratulations(time: finalTime), isActive: $gameWon) {
+//                    EmptyView()
+//                }
+//                NavigationLink(destination: GameOver(time: finalTime), isActive: $gameOver) {
+//                    EmptyView()
+//                }
                 
+                Group {
+                    Settings(isHiddenPopup: $isHiddenPopup, changeVolume: $changeVolume)
+                } .isHidden(!isHiddenPopup, remove: !isHiddenPopup)
+                
+                Group {
+                    Congratulations(time: finalTime)
+                } .isHidden(!gameWon, remove: !gameWon)
+                
+                Group {
+                    GameOver(time: finalTime)
+                } .isHidden(!gameOver, remove: !gameOver)
                 
                     
             }.navigationBarBackButtonHidden(true)
+//                .onAppear {
+//                    let sound = Bundle.main.path(forResource: "backGameMusic", ofType: "mp3")
+//                    self.audioPlayer = try! AVAudioPlayer(contentsOf: URL(fileURLWithPath: sound!))
+//                    audioPlayer.play()
+//                    audioPlayer.numberOfLoops = -1
+//                    audioPlayer.setVolume(volume, fadeDuration: -1)
+//                }
         }
     }
     

@@ -13,17 +13,18 @@ struct Settings : View {
     @State var music : Bool = false
     @State var notification : Bool = false
     @State var audioPlayer2: AVAudioPlayer!
-    
+    @Binding var isHiddenPopup: Bool
+    @Binding var changeVolume: Bool
     
     var body: some View {
-        NavigationView (){
+//        NavigationView (){
             
             ZStack {
-                Image("Partida6")
+//                Image("Partida6")
                 Rectangle()
                     .edgesIgnoringSafeArea(.all)
                     .opacity(0.5)
-                
+//                
                 Image("clipboard1")
                     .offset(y:-50)
                 
@@ -36,6 +37,7 @@ struct Settings : View {
                     .frame(width: 171)
                 
                 Button (action: {
+                    isHiddenPopup = false
                     let sound = Bundle.main.path(forResource: "clickSound", ofType: "wav")
                     self.audioPlayer2 = try! AVAudioPlayer(contentsOf: URL(fileURLWithPath: sound!))
                     audioPlayer2.play()
@@ -46,9 +48,18 @@ struct Settings : View {
                 
                 Button (action: {
                     click.toggle()
+                    changeVolume.toggle()
+                    
                     let sound = Bundle.main.path(forResource: "clickSound", ofType: "wav")
                     self.audioPlayer2 = try! AVAudioPlayer(contentsOf: URL(fileURLWithPath: sound!))
                     audioPlayer2.play()
+                    
+                    if click {
+                        volume = 0
+                    }else {
+                        volume = 1
+                    }
+                        
                     // colocar uma navigation link
                 }) {
                     Image(click ? "buttonSoundPressed" : "buttonSound1")
@@ -100,13 +111,13 @@ struct Settings : View {
                 }.offset(x: 80, y: 100)
                 
             }
-        }.navigationBarBackButtonHidden(true)
+//        }.navigationBarBackButtonHidden(true)
     }
 }
 
-struct Settings_Previews: PreviewProvider {
-    static var previews: some View {
-        Settings()
-    }
-}
+//struct Settings_Previews: PreviewProvider {
+//    static var previews: some View {
+//        GameScreenView(player: 1)
+//    }
+//}
 

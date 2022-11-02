@@ -16,12 +16,12 @@ struct GameOver : View {
     
     var body: some View {
         
-        NavigationView(){
+//        NavigationView(){
             
             ZStack {
                 Rectangle()
                     .edgesIgnoringSafeArea(.all)
-                    .opacity(0.9)
+                    .opacity(0.5)
                 
                 Image("gameOver")
                     .offset(y:-50)
@@ -63,7 +63,7 @@ struct GameOver : View {
                 audioPlayer.play()
             }
             
-        }.navigationBarBackButtonHidden(true)
+//        }.navigationBarBackButtonHidden(true)
     }
 }
 
