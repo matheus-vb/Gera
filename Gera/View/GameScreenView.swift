@@ -369,6 +369,7 @@ struct GameScreenView: View {
                         .offset(x: -1,y: 9)
                         .frame(width: 78)
                     Image(glassLabel)
+                 
                         .offset(y: 10)
                         .opacity(0.8)
                     Text("Tentativas restantes: \(remainingTries)")
@@ -435,7 +436,9 @@ struct GameScreenView: View {
         while(true) {
             if currColor != gameConnectionManager.mixColor && gameConnectionManager.mixColor != "FFF" {
                 self.remainingTries -= 1
-                NotificationConfiguration.sendNotification(withConfiguration: NotificationConfiguration.notificationContent()[remainingTries - 1])
+                if remainingTries >= 1 {
+                    NotificationConfiguration.sendNotification(withConfiguration: NotificationConfiguration.notificationContent()[remainingTries - 1])
+                }
                 await delayAnimation()
             }
             
@@ -445,7 +448,7 @@ struct GameScreenView: View {
             
             if remainingTries == 0 {
                 gameConnectionManager.resetConnection()
-                try? await Task.sleep(nanoseconds: 100_000_000)
+                //try? await Task.sleep(nanoseconds: 100_000_000)
                 self.gameOver = true
                 gameConnectionManager.send(colorName: "lost")
                 
@@ -464,7 +467,7 @@ struct GameScreenView: View {
             if currColor == gameConnectionManager.mixColor {
                 print("-----DONE-----")
                 gameConnectionManager.resetConnection()
-                try? await Task.sleep(nanoseconds: 100_000_000)
+                //try? await Task.sleep(nanoseconds: 100_000_000)
                 self.gameWon = true
                 gameConnectionManager.send(colorName: "won")
             } else if gameConnectionManager.gameWon {
