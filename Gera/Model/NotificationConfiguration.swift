@@ -53,7 +53,7 @@ extension NotificationConfiguration{
         
         let content = UNMutableNotificationContent()
         content.title = withConfiguration.title
-        content.subtitle = withConfiguration.body
+        content.body = withConfiguration.body
         content.sound = UNNotificationSound.default
         
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 0.1, repeats: false)
