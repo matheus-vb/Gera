@@ -31,6 +31,9 @@ class GameConnectionManager: NSObject, ObservableObject, MCSessionDelegate, MCAd
     @Published var hostPlayed: Bool = false
     @Published var joinPlayed: Bool = false
     
+    @Published var gameOver: Bool = false
+    @Published var gameWon: Bool = false
+    
     let peerID: MCPeerID!
     var session: MCSession!
     var advertiseAssistant: MCNearbyServiceAdvertiser!
@@ -131,7 +134,7 @@ class GameConnectionManager: NSObject, ObservableObject, MCSessionDelegate, MCAd
         }
         
         if hostPlayed && joinPlayed {
-            try? await Task.sleep(nanoseconds: 1_000_000_000)
+            try? await Task.sleep(nanoseconds: 500_000_000)
             DispatchQueue.main.async {
                 self.mixColor = "FFF"
                 self.colorHost = "FFF"
@@ -206,6 +209,16 @@ class GameConnectionManager: NSObject, ObservableObject, MCSessionDelegate, MCAd
         
         let str = String(data: data, encoding: .utf8)!
         print(str)
+        
+        if str == "won" {
+            DispatchQueue.main.async {
+                self.gameWon = true
+            }
+        } else if str == "lost" {
+            DispatchQueue.main.async {
+                self.gameOver = true
+            }
+        }
         
         DispatchQueue.main.async {
             self.colorCode = str

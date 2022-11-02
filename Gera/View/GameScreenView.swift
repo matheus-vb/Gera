@@ -15,7 +15,7 @@ struct GameScreenView: View {
     var playerColors: PlayerColors
     
     @EnvironmentObject var gameConnectionManager: GameConnectionManager
-    
+
     let asset1: String
     let asset2: String
     let asset3: String
@@ -40,12 +40,16 @@ struct GameScreenView: View {
     @State var playerOneColor = ""
     @State var mixColor = "FFF"
     
+    @State var remainingTries = 5
+    
     @State var gameOver: Bool = false
+    @State var gameWon: Bool = false
     
     let location1: CGPoint = CGPoint(x: -120, y: 245)
     let location2: CGPoint = CGPoint(x: 0, y: 245)
     let location3: CGPoint = CGPoint(x: 120, y: 245)
     
+    @State var finalTime = 0
     @State var timeRemaining = 30
     @State var timeRemainingString = "30"
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
@@ -239,7 +243,7 @@ struct GameScreenView: View {
                 Group {
                     Button(action: {
                         //config view
-                        
+                        gameWon.toggle()
                         
                     }) {
                         Image("Config_Button")
@@ -248,15 +252,19 @@ struct GameScreenView: View {
                         .offset(x: 0, y: -316)
                     Text("00:\(timeRemainingString)")
                         .onReceive(timer) { _ in
-                            if timeRemaining > 0 {
-                                timeRemaining -= 1
-                                if timeRemaining < 10 {
-                                    timeRemainingString = "0\(timeRemaining)"
-                                }else {
-                                    timeRemainingString = "\(timeRemaining)"
+                            if gameWon || gameOver {
+                                self.finalTime = timeRemaining
+                            } else {
+                                if timeRemaining > 0 {
+                                    timeRemaining -= 1
+                                    if timeRemaining < 10 {
+                                        timeRemainingString = "0\(timeRemaining)"
+                                    }else {
+                                        timeRemainingString = "\(timeRemaining)"
+                                    }
+                                }else if timeRemaining == 0 {
+                                    //self.gameOver = true
                                 }
-                            }else if timeRemaining == 0 {
-                                self.gameOver = true
                             }
                         }
                         .offset(y: -300)
@@ -265,6 +273,7 @@ struct GameScreenView: View {
                     
                     Button(action: {
                         missed.toggle()
+                        gameOver.toggle()
                         Task {
                             await delayAnimation()
                         }
@@ -287,6 +296,7 @@ struct GameScreenView: View {
                         .foregroundColor(Color(hex: gameConnectionManager.mixColor))
                         .offset(y: -85)
                         .task(checkResult)
+                        .task(checkGameOver)
                     Image("barBorder")
                         .offset(y: -85)
                 }
@@ -326,9 +336,33 @@ struct GameScreenView: View {
                         .offset(y: 10)
                         .opacity(0.8)
                 }
+                NavigationLink(destination: Congratulations(time: finalTime), isActive: $gameWon) {
+                    EmptyView()
+                }
+                NavigationLink(destination: GameOver(time: finalTime), isActive: $gameOver) {
+                    EmptyView()
+                }
+                
                 
                     
             }.navigationBarBackButtonHidden(true)
+        }
+    }
+    
+    private func checkGameOver() async {
+        while(true) {
+            if currColor != gameConnectionManager.mixColor && gameConnectionManager.mixColor != "FFF" {
+                self.remainingTries -= 1
+                await delayAnimation()
+            }
+            if remainingTries == 0 {
+                self.gameOver = true
+                gameConnectionManager.send(colorName: "lost")
+            } else if gameConnectionManager.gameOver {
+                self.gameOver = true
+            }
+            
+            try? await Task.sleep(nanoseconds: 1_000_000_000)
         }
     }
     
@@ -336,14 +370,20 @@ struct GameScreenView: View {
         while(true) {
             if currColor == gameConnectionManager.mixColor {
                 print("-----DONE-----")
+                self.gameWon = true
+                gameConnectionManager.send(colorName: "won")
+            } else if gameConnectionManager.gameWon {
+                self.gameWon = true
             }
-            try? await Task.sleep(nanoseconds: 100_000_000)
+            
+            try? await Task.sleep(nanoseconds: 200_000_000)
         }
     }
     
     private func delayAnimation() async {
-        try? await Task.sleep(nanoseconds: 3_000_000_000)
-        missed.toggle()
+        self.missed = true
+        try? await Task.sleep(nanoseconds: 1_000_000_000)
+        self.missed = false
     }
     
     private func delayBacteria() async {
@@ -351,31 +391,31 @@ struct GameScreenView: View {
         
         while(true) {
             currColor = colors.YELLOWpGREEN
-            try? await Task.sleep(nanoseconds: 500_000_000)
+            try? await Task.sleep(nanoseconds: 1_000_000_000)
             
             currColor = colors.YELLOWpORANGE
-            try? await Task.sleep(nanoseconds: 500_000_000)
+            try? await Task.sleep(nanoseconds: 1_000_000_000)
             
             currColor = colors.YELLOWpPURPLE
-            try? await Task.sleep(nanoseconds: 500_000_000)
+            try? await Task.sleep(nanoseconds: 1_000_000_000)
             
             currColor = colors.REDpGREEN
-            try? await Task.sleep(nanoseconds: 500_000_000)
+            try? await Task.sleep(nanoseconds: 1_000_000_000)
             
             currColor = colors.REDpORANGE
-            try? await Task.sleep(nanoseconds: 500_000_000)
+            try? await Task.sleep(nanoseconds: 1_000_000_000)
             
             currColor = colors.REDpPURPLE
-            try? await Task.sleep(nanoseconds: 500_000_000)
+            try? await Task.sleep(nanoseconds: 1_000_000_000)
             
             currColor = colors.BLUEpGREEN
-            try? await Task.sleep(nanoseconds: 500_000_000)
+            try? await Task.sleep(nanoseconds: 1_000_000_000)
             
             currColor = colors.BLUEpORANGE
-            try? await Task.sleep(nanoseconds: 500_000_000)
+            try? await Task.sleep(nanoseconds: 1_000_000_000)
             
             currColor = colors.BLUEpPURPLE
-            try? await Task.sleep(nanoseconds: 500_000_000)
+            try? await Task.sleep(nanoseconds: 1_000_000_000)
         }
     }
 }
